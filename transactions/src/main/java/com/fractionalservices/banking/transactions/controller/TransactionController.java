@@ -16,6 +16,6 @@ public class TransactionController {
 
     @PostMapping("/txn/accountTransactions")
     public List<TransactionDetails> getAccountTransactions(@RequestBody TransactionRequest t) {
-        return service.getAccountTransactions(t.getAcctIban(), t.getTxnYear(), t.getTxnMonth(), t.getPageSize(), t.getStartPage());
+        return service.getAccountTransactions(t.getAcctNumber(), t.getTxnYear(), t.getTxnMonth(), t.getPageSize(), t.getStartPage());
     }
 }

@@ -6,7 +6,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.slf4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -50,12 +49,12 @@ public class TransactionDetailDao {
                 TransactionDetails details = parseToTransactionDetails((JSONObject) txnObj);
                 log.info("Parsing is done for the object : {}", details);
 
-                List<TransactionDetails> transactionDetails = transactionDetailsMap.get(details.getAcctIBank());
+                List<TransactionDetails> transactionDetails = transactionDetailsMap.get(details.getAcctNumber());
                 if(transactionDetails == null){
                     transactionDetails = new ArrayList<>();
                 }
                 transactionDetails.add(details);
-                transactionDetailsMap.put(details.getAcctIBank(), transactionDetails);
+                transactionDetailsMap.put(details.getAcctNumber(), transactionDetails);
             });
         } catch (IOException | ParseException | URISyntaxException e) {
             e.printStackTrace();
@@ -67,7 +66,7 @@ public class TransactionDetailDao {
         JSONObject txn = txnObj;
         String transactionId = (String) txn.get("transactionId");
         String amountAndCurrency = (String) txn.get("amount");
-        String acctIban = (String) txn.get("acctIban");
+        String acctNumber = (String) txn.get("acctNumber");
         String date = (String) txn.get("valueDate");
         String description = (String) txn.get("description");
 
@@ -83,7 +82,7 @@ public class TransactionDetailDao {
         // Value Date
         String currency = split[0];
         LocalDate valueDate = LocalDate.parse(date, formatter);
-        TransactionDetails details = new TransactionDetails(transactionId, amount, currency, acctIban, valueDate, description);
+        TransactionDetails details = new TransactionDetails(transactionId, amount, currency, acctNumber, valueDate, description);
         return details;
     }
 }

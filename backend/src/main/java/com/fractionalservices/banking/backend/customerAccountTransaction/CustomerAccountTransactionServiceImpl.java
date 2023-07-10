@@ -40,7 +40,7 @@ public class CustomerAccountTransactionServiceImpl implements CustomerAccountTra
         String currency = customerTransactionRequest.getCurrency();
 
         CustomerAccountDetails customerAccountDetails = customerAccountService.getCustomerAccountDetails(customerId, currency);
-        customerTransactionRequest.setAcctIban(customerAccountDetails.getAccountId());
+        customerTransactionRequest.setAcctNumber(customerAccountDetails.getAccountId());
         List<CustomerTransactionResponse> response = getAccountTransactions(customerTransactionRequest);
         return response;
     }

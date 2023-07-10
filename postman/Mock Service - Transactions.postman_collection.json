@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"acctIban\": \"acct_id_6\",\n    \"txnYear\": 2020,\n    \"txnMonth\" : 10,\n    \"startPage\": 0,\n    \"pageSize\": 5\n}",
+					"raw": "{\n    \"acctNumber\": \"acct_id_6\",\n    \"txnYear\": 2020,\n    \"txnMonth\" : 10,\n    \"startPage\": 0,\n    \"pageSize\": 5\n}",
 					"options": {
 						"raw": {
 							"language": "json"

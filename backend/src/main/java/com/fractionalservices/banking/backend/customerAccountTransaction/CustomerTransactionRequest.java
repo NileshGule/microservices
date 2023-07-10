@@ -17,7 +17,7 @@ public class CustomerTransactionRequest {
     private String customerId;
     private String currency;
     @JsonIgnore
-    private String acctIban;
+    private String acctNumber;
     private Integer year;
     private Integer month;
     private Integer pageNo;

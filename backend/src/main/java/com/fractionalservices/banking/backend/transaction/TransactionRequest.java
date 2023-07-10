@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TransactionRequest {
-    private String acctIban;
+    private String acctNumber;
     private Integer txnMonth;
     private Integer txnYear;
     private Integer pageNo;

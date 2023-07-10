@@ -10,7 +10,7 @@ def data_row(x):
     # row =  TXN_ID + ',' + AMOUNT + ',' +  ACCT_IBAN + ',' + VALUE_DATE + ','  + DESC
     json = '{ "transactionId" : "' + TXN_ID + '",' \
            ' "amount" : "' + AMOUNT +'",' \
-           ' "acctIban" : "' + ACCT_IBAN +'",' \
+           ' "acctNumber" : "' + ACCT_IBAN +'",' \
            ' "valueDate" : "' + VALUE_DATE + '",' \
            ' "description" : "' + DESC + '" }'\
 
