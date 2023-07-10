@@ -9,7 +9,7 @@ import java.util.List;
 public class TransactionController {
 
     @Autowired
-    private TransactionService service;
+    private TransactionServiceImpl service;
 
     @PostMapping("/txn/accountTransactions")
     public List<TransactionDetails> getAccountTransactions(@RequestBody TransactionRequest t) {

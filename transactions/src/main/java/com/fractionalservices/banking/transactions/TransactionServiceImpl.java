@@ -8,12 +8,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class TransactionServiceImpl implements TransactionService{
+public class TransactionServiceImpl{
 
     @Autowired
     private TransactionDetailDao dao;
 
-    @Override
     public List<TransactionDetails> getAccountTransactions(String acctNumber, Integer txnYear, Integer txnMonth, Integer pageSize, Integer startPage){
 
 
