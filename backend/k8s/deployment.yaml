@@ -36,7 +36,7 @@ spec:
           periodSeconds: 5
         readinessProbe:
           httpGet:
-            path: /ebanking/version
+            path: /backend/version
             port: liveness-port
           initialDelaySeconds: 5
           failureThreshold: 3

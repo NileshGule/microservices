@@ -5,7 +5,6 @@ import com.fractionalservices.banking.backend.authentication.AuthenticationValid
 import com.fractionalservices.banking.backend.authentication.CustomerDetails;
 import com.fractionalservices.banking.backend.authentication.InvalidCustomerException;
 import com.fractionalservices.banking.backend.exception.BadRequestException;
-import com.fractionalservices.banking.backend.exception.ForbiddenException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class CustomerAccountTransactionController {
     @Autowired
     private CustomerAccountTransactionService customerAccountTransactionService;
 
-    @PostMapping("/ebanking/customer/transactions")
+    @PostMapping("/customer/transactions")
     public ResponseEntity<CustomerAccountTransactionResponse> getCustomerTransactions(
             @RequestBody CustomerTransactionRequest customerTransactionRequest,
             @RequestHeader HttpHeaders headers)

@@ -1,4 +1,4 @@
-package com.fs.servides.backend.configuration;
+package com.fractionalservices.banking.backend.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

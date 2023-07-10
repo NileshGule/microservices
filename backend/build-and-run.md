@@ -60,7 +60,7 @@ $
 ```shell
 $ docker run -p 8080:8080 backend-api
 ```
-Open your browser and hit http://localhost:8080/ebanking/version
+Open your browser and hit http://localhost:8080/backend/version
 
 
 ## Run as Spring boot project with profile (local or k8s).
@@ -70,7 +70,7 @@ $ mvn spring-boot:run -Dspring.run.arguments=--spring.profiles.active=local
 # or
 $ java -jar target/ -Dspring.profiles.active=local
 ```
-Open your browser and hit http://localhost:<<port_no>>/ebanking/version
+Open your browser and hit http://localhost:<<port_no>>/backend/version
 
 
 ## Run as k8s cluster on minikube
@@ -105,7 +105,7 @@ The url in local are secure are same when run as spring boot jars or on kubernet
 ### Verify when running as spring boot
 * **eBanking-API service**
     * Verify eBanking (liveness-probe)/Health - https://localhost:8080/actuator/health
-    * Verify eBanking (readiness-probe)Up and running - https://localhost:8080/ebanking/version
+    * Verify eBanking (readiness-probe)Up and running - https://localhost:8080/backend/version
     * Verify eBanking Swagger - https://localhost:8080/swagger.html
 * **Mock Service APi**
     * Verify mock-service (liveness-probe)/Health - http://localhost:8091/actuator/health
@@ -119,7 +119,7 @@ The url in local are secure are same when run as spring boot jars or on kubernet
 ## Application Functional Verification
 
 Endpoint for testing the transaction <br>
-Post https://localhost:8080/ebanking/customer/transactions
+Post https://localhost:8080/backend/customer/transactions
 
 
 
@@ -134,14 +134,14 @@ The token are generated with commands mentioned and are the only tokens accepted
 
 
 ### Customer and Accounts mappings.
-|Customer-Id|Account Id| Currency|
-|:-----|:-----|:--------|
-|P-0123456789|CH93-0000-0000-93454|INR|
-|P-0123456789|CH93-0000-0000-93451|SGD|
-|P-0123456789|CH93-0000-0000-93452|USD|
-|P-0123456790|CH93-0000-0000-93459|USD|
-|P-0123456790|CH93-0000-0000-93458|SGD|
-|P-0123456791|CH93-0000-0000-93457|USD|
+|Customer-Id| Account Id           | Currency|
+|:-----|:---------------------|:--------|
+|P-0123456789| acct_id_6            |INR|
+|P-0123456789| acct_id_3            |SGD|
+|P-0123456789| CH93-0000-0000-93452 |USD|
+|P-0123456790| acct_id_10 |USD|
+|P-0123456790| acct_id_2            |SGD|
+|P-0123456791| acct_id_9 |USD|
 
 Customer with id * **P-0123456789** has most of the data, specially for year-2020, Month-10   
 While testing the API with different tokens, remember to change the "Customer ID" in the request body.

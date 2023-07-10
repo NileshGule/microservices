@@ -3,16 +3,14 @@ package com.fractionalservices.banking.backend.customerAccountTransaction;
 
 import com.fractionalservices.banking.backend.authentication.InvalidCustomerException;
 import com.fractionalservices.banking.backend.customerAccount.CustomerAccountDetails;
-import com.fractionalservices.banking.backend.customerAccount.CustomerAccountException;
 import com.fractionalservices.banking.backend.customerAccount.CustomerAccountService;
 import com.fractionalservices.banking.backend.exception.BadRequestException;
 import com.fractionalservices.banking.backend.transaction.NoTransactionException;
 import com.fractionalservices.banking.backend.transaction.TransactionRequest;
 import com.fractionalservices.banking.backend.transaction.TransactionResponse;
 import com.fractionalservices.banking.backend.transaction.TransactionService;
+import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
@@ -22,9 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class CustomerAccountTransactionServiceImpl implements CustomerAccountTransactionService {
-
-    private static Logger logger = LoggerFactory.getLogger(CustomerAccountTransactionServiceImpl.class);
 
     @Autowired
     private CustomerAccountService customerAccountService;
@@ -50,7 +47,7 @@ public class CustomerAccountTransactionServiceImpl implements CustomerAccountTra
 
     private List<CustomerTransactionResponse> getAccountTransactions(CustomerTransactionRequest customerTransactionRequest) {
         TransactionRequest transactionRequest = requestResponseMapper.toTransactionRequest(customerTransactionRequest);
-        List<TransactionResponse> transactionResponse = transactionService.getTransactionAccounts(transactionRequest);
+        List<TransactionResponse> transactionResponse = transactionService.getTransactions(transactionRequest);
 
         List<CustomerTransactionResponse> customerTransactionResponses = new ArrayList<>();
         transactionResponse.forEach(tr -> {

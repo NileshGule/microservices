@@ -27,7 +27,7 @@ public class TransactionServiceImpl implements TransactionService {
     private String accountTransactionServiceUrl;
 
     @Override
-    public List<TransactionResponse> getTransactionAccounts(TransactionRequest transactionRequest) {
+    public List<TransactionResponse> getTransactions(TransactionRequest transactionRequest) {
         logger.info("Get transaction, transaction request : {}", transactionRequest);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

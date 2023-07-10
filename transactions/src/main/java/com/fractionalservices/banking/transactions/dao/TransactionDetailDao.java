@@ -1,10 +1,12 @@
 package com.fractionalservices.banking.transactions.dao;
 
 import com.fractionalservices.banking.transactions.entity.TransactionDetails;
+import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -22,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
+@Slf4j
 public class TransactionDetailDao {
-
 
     private static Map<String, List<TransactionDetails>> transactionDetailsMap ;
 
@@ -32,19 +34,21 @@ public class TransactionDetailDao {
     public Map<String, List<TransactionDetails>> getAccountTransactions() {
 
         if (!CollectionUtils.isEmpty(transactionDetailsMap)) {
+            log.info("Returning data from cache");
             return transactionDetailsMap;
         }
         transactionDetailsMap = new HashMap<>();
         JSONParser parser = new JSONParser();
 
         try {
-
+            log.info("Reading data from file");
             URL res = getClass().getClassLoader().getResource("transactions.json");
             File file = Paths.get(res.toURI()).toFile();
             JSONArray txns = (JSONArray) parser.parse(new FileReader(file));
 
             txns.forEach(txnObj -> {
                 TransactionDetails details = parseToTransactionDetails((JSONObject) txnObj);
+                log.info("Parsing is done for the object : {}", details);
 
                 List<TransactionDetails> transactionDetails = transactionDetailsMap.get(details.getAcctIBank());
                 if(transactionDetails == null){

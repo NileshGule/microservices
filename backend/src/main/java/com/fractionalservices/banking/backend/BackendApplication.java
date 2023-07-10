@@ -1,4 +1,4 @@
-package com.fs.servides.backend;
+package com.fractionalservices.banking.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

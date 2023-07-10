@@ -18,8 +18,9 @@ spring:
       exporter:
         otlp:
           endpoint: http://localhost:4317
-  tracing:
-    url: http://localhost:4318/v1/traces
+
+tracing:
+  url: http://localhost:4318/v1/traces
 
   management:
     tracing:
@@ -37,6 +38,12 @@ server:
 #    key-store-type: ${tomcat_key_store_type}
 #    key-alias: ${tomcat_key_store_alias}
 
+authenticate_service_url: http://localhost:8081/sso/authenticate/customer?token={token}
+customer_account_service_customer_url: http://localhost:8082/customer/account/{customerId}
+customer_account_service_customer_currency_url: http://localhost:8082/customer/account/{customerId}/{currency}
+exchange_rate_url: http://localhost:8083/exchange-rate/getAll
+account_transaction_service_url: http://localhost:8084/txn/accountTransactions
+
 services:
   url:
     exchange-rate: ${exchange_rate_url}
@@ -44,6 +51,8 @@ services:
     customer-account-service-customer-currency: ${customer_account_service_customer_currency_url}
     account-transaction-service: ${account_transaction_service_url}
     authenticate-service: ${authenticate_service_url}
+
+
 
 logging:
   file:

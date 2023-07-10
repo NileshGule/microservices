@@ -24,7 +24,7 @@ public class ExchangeContoller {
         lines.forEach( line -> {
             line = line.toUpperCase();
             String[] item = line.split(",");
-            map.put(item[0] + "/" + item[1], new Double(item[2]));
+            map.put(item[0] + "/" + item[1], Double.parseDouble(item[2]));
         });
 
         return map;
