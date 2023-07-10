@@ -20,7 +20,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{mock-server}}:{{mock-port}}/txn/accountTransactions",
+					"raw": "http://localhost:8084/txn/accountTransactions",
 					"protocol": "http",
 					"host": [
 						"{{mock-server}}"

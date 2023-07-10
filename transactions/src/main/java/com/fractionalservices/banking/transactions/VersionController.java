@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class VersionController {
-    @GetMapping("/txn/health")
+    @GetMapping("/version")
     public String getVersion() {
         return "1.0";
     }
