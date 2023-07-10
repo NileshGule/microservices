@@ -19,14 +19,4 @@ public class OtelConfiguration {
                 .build();
     }
 
-//    @Bean
-//    @Primary
-//    SpanExporter otlpHttpSpanExporter() {
-//        return OtlpHttpSpanExporter
-//                .builder()
-//                .addHeader("Content-Type", "application/x-protobuf")
-//                .setEndpoint("http://remote-monitoring-tool/enpoint/v1/trace")
-//                .build();
-//    }
-
 }

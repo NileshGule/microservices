@@ -9,10 +9,8 @@ spring:
   security:
     basic:
       enabled: false
-
   application:
     name: backend-app
-
   sleuth:
     otel:
       config:
@@ -20,14 +18,14 @@ spring:
       exporter:
         otlp:
           endpoint: http://localhost:4317
-
-tracing:
-  url: http://localhost:4318/v1/traces
-
-management:
   tracing:
-    sampling:
-      probability: 1.0
+    url: http://localhost:4318/v1/traces
+
+  management:
+    tracing:
+      sampling:
+        probability: 1.0
+
 
 server:
   servlet:
