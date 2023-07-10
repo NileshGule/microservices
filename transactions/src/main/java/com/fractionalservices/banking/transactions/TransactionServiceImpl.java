@@ -1,7 +1,5 @@
-package com.fractionalservices.banking.transactions.service;
+package com.fractionalservices.banking.transactions;
 
-import com.fractionalservices.banking.transactions.dao.TransactionDetailDao;
-import com.fractionalservices.banking.transactions.entity.TransactionDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

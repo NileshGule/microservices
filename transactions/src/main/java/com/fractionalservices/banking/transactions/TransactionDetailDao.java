@@ -1,6 +1,6 @@
-package com.fractionalservices.banking.transactions.dao;
+package com.fractionalservices.banking.transactions;
 
-import com.fractionalservices.banking.transactions.entity.TransactionDetails;
+import com.fractionalservices.banking.transactions.TransactionDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -47,7 +47,7 @@ public class TransactionDetailDao {
 
             txns.forEach(txnObj -> {
                 TransactionDetails details = parseToTransactionDetails((JSONObject) txnObj);
-                log.info("Parsing is done for the object : {}", details);
+//                log.info("Parsing is done for the object : {}", details);
 
                 List<TransactionDetails> transactionDetails = transactionDetailsMap.get(details.getAcctNumber());
                 if(transactionDetails == null){

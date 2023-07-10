@@ -1,4 +1,4 @@
-package com.fractionalservices.banking.transactions.entity;
+package com.fractionalservices.banking.transactions;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

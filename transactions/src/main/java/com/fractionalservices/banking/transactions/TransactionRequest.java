@@ -1,4 +1,4 @@
-package com.fractionalservices.banking.transactions.entity;
+package com.fractionalservices.banking.transactions;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

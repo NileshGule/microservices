@@ -1,6 +1,6 @@
-package com.fractionalservices.banking.transactions.service;
+package com.fractionalservices.banking.transactions;
 
-import com.fractionalservices.banking.transactions.entity.TransactionDetails;
+import com.fractionalservices.banking.transactions.TransactionDetails;
 
 import java.util.List;
 

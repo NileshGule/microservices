@@ -1,8 +1,5 @@
-package com.fractionalservices.banking.transactions.controller;
+package com.fractionalservices.banking.transactions;
 
-import com.fractionalservices.banking.transactions.entity.TransactionDetails;
-import com.fractionalservices.banking.transactions.entity.TransactionRequest;
-import com.fractionalservices.banking.transactions.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
