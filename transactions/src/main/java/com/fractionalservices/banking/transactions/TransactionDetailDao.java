@@ -47,8 +47,6 @@ public class TransactionDetailDao {
 
             txns.forEach(txnObj -> {
                 TransactionDetails details = parseToTransactionDetails((JSONObject) txnObj);
-//                log.info("Parsing is done for the object : {}", details);
-
                 List<TransactionDetails> transactionDetails = transactionDetailsMap.get(details.getAcctNumber());
                 if(transactionDetails == null){
                     transactionDetails = new ArrayList<>();
@@ -57,12 +55,13 @@ public class TransactionDetailDao {
                 transactionDetailsMap.put(details.getAcctNumber(), transactionDetails);
             });
         } catch (IOException | ParseException | URISyntaxException e) {
-            e.printStackTrace();
+            log.error("Error getting the transaction details : ", e);
         }
         return transactionDetailsMap;
     }
 
     private TransactionDetails parseToTransactionDetails(JSONObject txnObj) {
+        log.debug("Preparing to parse the transaction elements");
         JSONObject txn = txnObj;
         String transactionId = (String) txn.get("transactionId");
         String amountAndCurrency = (String) txn.get("amount");

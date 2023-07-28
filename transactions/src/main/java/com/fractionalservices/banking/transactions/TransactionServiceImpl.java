@@ -1,5 +1,6 @@
 package com.fractionalservices.banking.transactions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class TransactionServiceImpl{
 
     @Autowired
@@ -15,6 +17,7 @@ public class TransactionServiceImpl{
 
     public List<TransactionDetails> getAccountTransactions(String acctNumber, Integer txnYear, Integer txnMonth, Integer pageSize, Integer startPage){
 
+        log.debug("Start get transaction information");
 
         Map<String, List<TransactionDetails>> txnMap = dao.getAccountTransactions();
         List<TransactionDetails> transactionDetails = txnMap.get(acctNumber);
