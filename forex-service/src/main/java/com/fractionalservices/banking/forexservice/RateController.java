@@ -1,5 +1,8 @@
 package com.fractionalservices.banking.forexservice;
 
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,9 +16,14 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 @RestController
-public class RateContoller {
+
+public class RateController {
+
+    private static final Logger log = LoggerFactory.getLogger(RateController.class);
+
     @GetMapping("/rates")
     public Map<String, Double> getAll() throws IOException, URISyntaxException {
+        log.info("Start get forex rates");
         Path path = Paths.get(getClass().getClassLoader()
                 .getResource("forex-data.csv").toURI());
 
@@ -26,6 +34,7 @@ public class RateContoller {
             String[] item = line.split(",");
             map.put(item[0] + "/" + item[1], Double.parseDouble(item[2]));
         });
+        log.info("Returning data from forex with combination of {} currencies:", map.size());
 
         return map;
     }
