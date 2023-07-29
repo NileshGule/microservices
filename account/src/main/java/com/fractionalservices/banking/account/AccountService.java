@@ -1,6 +1,5 @@
-package com.fractionalservices.banking.customer.service;
+package com.fractionalservices.banking.account;
 
-import com.fractionalservices.banking.customer.entity.AccountDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class CustomerAccountService {
+public class AccountService {
 
     private static Map<String, List<AccountDetails>> customerAccountMap;
 

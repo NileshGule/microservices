@@ -1,4 +1,4 @@
-package com.fractionalservices.banking.customer;
+package com.fractionalservices.banking.account;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

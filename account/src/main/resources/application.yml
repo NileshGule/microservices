@@ -1,14 +1,11 @@
 server:
   port: 8082
+  servlet:
+    context-path: /account
 
 spring:
-  security:
-    basic:
-      enabled: false
-
   application:
-    name: customer-app
-
+    name: account-service
   sleuth:
     otel:
       config:
@@ -17,8 +14,8 @@ spring:
         otlp:
           endpoint: http://localhost:4317
 
-  tracing:
-    url: http://localhost:4318/v1/traces
+tracing:
+  url: http://localhost:4318/v1/traces
 
   management:
     tracing:
