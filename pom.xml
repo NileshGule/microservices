@@ -20,7 +20,7 @@
     <modules>
         <module>backend</module>
         <module>customer</module>
-        <module>exchangerate</module>
+        <module>forex-service</module>
         <module>sso</module>
         <module>transactions</module>
     </modules>

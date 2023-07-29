@@ -1,4 +1,4 @@
-package com.fractionalservices.banking.exchangerate.controller;
+package com.fractionalservices.banking.forexservice;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,11 +13,11 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 @RestController
-public class ExchangeContoller {
-    @GetMapping("/exchange-rate/getAll")
+public class RateContoller {
+    @GetMapping("/rates")
     public Map<String, Double> getAll() throws IOException, URISyntaxException {
         Path path = Paths.get(getClass().getClassLoader()
-                .getResource("exchange-rate-data.csv").toURI());
+                .getResource("forex-data.csv").toURI());
 
         Stream<String> lines = Files.lines(path);
         Map<String, Double> map = new HashMap<>();

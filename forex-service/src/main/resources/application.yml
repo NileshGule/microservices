@@ -1,0 +1,23 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /exchange-rate
+
+spring:
+  application:
+    name: exchange-rate-service
+  sleuth:
+    otel:
+      config:
+        trace-id-ratio-based: 1.0
+      exporter:
+        otlp:
+          endpoint: http://localhost:4317
+
+tracing:
+  url: http://localhost:4318/v1/traces
+
+  management:
+    tracing:
+      sampling:
+        probability: 1.0
