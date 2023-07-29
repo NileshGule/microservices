@@ -22,7 +22,7 @@
         <module>account-service</module>
         <module>forex-service</module>
         <module>authentication-service</module>
-        <module>transactions-service</module>
+        <module>transaction-service</module>
     </modules>
 
     <properties>
