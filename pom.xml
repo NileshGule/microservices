@@ -15,7 +15,7 @@
     <artifactId>microservices</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
-    <name>banking Services</name>
+    <name>Banking Micro-services Multimodule</name>
 
     <modules>
         <module>backend-service</module>
