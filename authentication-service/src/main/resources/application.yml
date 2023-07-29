@@ -1,11 +1,11 @@
 server:
-  port: 8083
+  port: 8081
   servlet:
-    context-path: /forex-service
+    context-path: /authentication-service
 
 spring:
   application:
-    name: forex-service
+    name: authentication-service
   sleuth:
     otel:
       config:

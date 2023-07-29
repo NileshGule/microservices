@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "a66f81a0-ca95-4187-837f-59a8b3c4e231",
+		"_postman_id": "6d82bc8c-dff8-4b6f-833e-a7311a3caf8d",
 		"name": "Authentication Service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1906397",
-		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-a66f81a0-ca95-4187-837f-59a8b3c4e231?action=share&creator=1906397&source=collection_link"
+		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-6d82bc8c-dff8-4b6f-833e-a7311a3caf8d?action=share&creator=1906397&source=collection_link"
 	},
 	"item": [
 		{
@@ -13,14 +13,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/authentication/authenticate/token?token=P-0123456789eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAiY3VzdG9tZXJJZCI6ICJQLTAxMjM0NTY3ODkiICwgImVtYWlsIjoiZW1wbG95ZWUzQHNwLmNvbSJ9.nLxacDiNrEOcvZ-qlGgJ1ugEGNBxTck2AwFBIwZBsS0",
+					"raw": "http://localhost:8081/authentication-service/authenticate/token?token=P-0123456789eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAiY3VzdG9tZXJJZCI6ICJQLTAxMjM0NTY3ODkiICwgImVtYWlsIjoiZW1wbG95ZWUzQHNwLmNvbSJ9.nLxacDiNrEOcvZ-qlGgJ1ugEGNBxTck2AwFBIwZBsS0",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8081",
 					"path": [
-						"authentication",
+						"authentication-service",
 						"authenticate",
 						"token"
 					],
@@ -40,14 +40,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8081/authentication/version",
+					"raw": "http://localhost:8081/authentication-service/version",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8081",
 					"path": [
-						"authentication",
+						"authentication-service",
 						"version"
 					]
 				}

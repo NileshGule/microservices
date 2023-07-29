@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "Get Customer All Accounts all transaction first page",
+			"name": "Get Customer accounts aand transactions",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -52,14 +52,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8084/txn/version",
+					"raw": "http://localhost:8080/backend-service/version",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8084",
+					"port": "8080",
 					"path": [
-						"txn",
+						"backend-service",
 						"version"
 					]
 				}

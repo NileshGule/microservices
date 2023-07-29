@@ -1,11 +1,18 @@
 server:
-  port: 8083
+  port: 8084
   servlet:
-    context-path: /forex-service
+    context-path: /transaction-service
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger.html
+    operationsSorter: method
 
 spring:
   application:
-    name: forex-service
+    name: transaction-service
   sleuth:
     otel:
       config:

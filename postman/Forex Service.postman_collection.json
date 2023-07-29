@@ -27,13 +27,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8083/forex/rates",
+					"raw": "localhost:8083/forex-service/rates",
 					"host": [
 						"localhost"
 					],
 					"port": "8083",
 					"path": [
-						"forex",
+						"forex-service",
 						"rates"
 					]
 				}
@@ -46,14 +46,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/forex/version",
+					"raw": "http://localhost:8083/forex-service/version",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8083",
 					"path": [
-						"forex",
+						"forex-service",
 						"version"
 					]
 				}

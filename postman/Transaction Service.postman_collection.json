@@ -13,14 +13,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8084/txn/version",
+					"raw": "http://localhost:8084/transaction-service/version",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8084",
 					"path": [
-						"txn",
+						"transaction-service",
 						"version"
 					]
 				}
@@ -42,14 +42,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8084/txn/accountTransactions",
+					"raw": "http://localhost:8084/transaction-service/accountTransactions",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8084",
 					"path": [
-						"txn",
+						"transaction-service",
 						"accountTransactions"
 					]
 				}

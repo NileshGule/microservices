@@ -18,11 +18,11 @@
     <name>banking Services</name>
 
     <modules>
-        <module>backend</module>
-        <module>account</module>
+        <module>backend-service</module>
+        <module>account-service</module>
         <module>forex-service</module>
-        <module>authentication</module>
-        <module>transactions</module>
+        <module>authentication-service</module>
+        <module>transactions-service</module>
     </modules>
 
     <properties>

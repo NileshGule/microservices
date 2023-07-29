@@ -1,28 +1,48 @@
 {
 	"info": {
-		"_postman_id": "3660fd3e-6d97-42f6-b1b1-4cc3760b5c77",
+		"_postman_id": "149e9ad7-4745-43d7-8b75-5186c959f26d",
 		"name": "Account Service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1906397",
-		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-3660fd3e-6d97-42f6-b1b1-4cc3760b5c77?action=share&creator=1906397&source=collection_link"
+		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-149e9ad7-4745-43d7-8b75-5186c959f26d?action=share&creator=1906397&source=collection_link"
 	},
 	"item": [
 		{
-			"name": "Get Customer Accounts",
+			"name": "Accounts By Customer & Currency",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/account/P-0123456789/INR",
+					"raw": "http://localhost:8082/account-service/P-0123456789/INR",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8082",
 					"path": [
-						"account",
+						"account-service",
 						"P-0123456789",
 						"INR"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Accounts By Customer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/account-service/P-0123456789",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"account-service",
+						"P-0123456789"
 					]
 				}
 			},
@@ -34,14 +54,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/account/version",
+					"raw": "http://localhost:8082/account-service/version",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8082",
 					"path": [
-						"account",
+						"account-service",
 						"version"
 					]
 				}
