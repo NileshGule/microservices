@@ -1,11 +1,11 @@
 server:
   port: 8083
   servlet:
-    context-path: /exchange-rate
+    context-path: /forex
 
 spring:
   application:
-    name: exchange-rate-service
+    name: forex-service
   sleuth:
     otel:
       config:
