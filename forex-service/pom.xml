@@ -8,7 +8,7 @@
 
 	<parent>
 		<groupId>com.fractionalservices</groupId>
-		<artifactId>banking</artifactId>
+		<artifactId>microservices</artifactId>
 		<version>1.0</version>
 	</parent>
 
