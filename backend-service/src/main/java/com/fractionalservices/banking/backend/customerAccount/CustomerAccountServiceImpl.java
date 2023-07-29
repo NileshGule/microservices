@@ -30,7 +30,7 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
         validateRequest(customerId, currency);
 
         try {
-            logger.info("Get customer details from customer_account_service");
+            logger.info("Get customer details from account_service");
             ResponseEntity<CustomerAccountDetails> responseEntity = restTemplate.exchange(customerAccountServiceCustomerCurrencyUrl,
                     HttpMethod.GET, null, CustomerAccountDetails.class, customerId, currency);
             logger.debug("Get customer Account details : ends");
@@ -44,8 +44,9 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
             logger.info("Get customer transaction - ends");
             return customerAccountDetails;
         } catch (Exception ex) {
+            logger.error("No customer accounts found with customerId : {}, currency : {}", customerId, currency);
             logger.error("Error : Get customer details from customer_account_service", ex);
-            throw new NoTransactionException("No transactions found");
+            throw new NoTransactionException("No customer accounts found with customerI");
         }
     }
 

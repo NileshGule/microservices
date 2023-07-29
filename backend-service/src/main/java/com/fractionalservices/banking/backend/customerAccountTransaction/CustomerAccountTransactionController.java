@@ -5,6 +5,7 @@ import com.fractionalservices.banking.backend.authentication.AuthenticationValid
 import com.fractionalservices.banking.backend.authentication.CustomerDetails;
 import com.fractionalservices.banking.backend.authentication.InvalidCustomerException;
 import com.fractionalservices.banking.backend.exception.BadRequestException;
+import com.fractionalservices.banking.backend.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,18 +42,19 @@ public class CustomerAccountTransactionController {
         // Authentication Validation
         CustomerDetails customerDetails = authenticationValidationService.validateAndGetCustomer(headers, customerTransactionRequest.getCustomerId());
 
+        logger.info("Customer is valid with id : {}", customerDetails.getCustomerId());
         // Validate Request Parameters
         validateCustomerTransactionRequest(customerTransactionRequest, customerDetails.getCustomerId());
 
         logger.info("Customer validation is successful, getting customer transactions - start");
-        customerTransactionRequest.setCustomerId(customerDetails.getCustomerId());
+
         List<CustomerTransactionResponse> responses = customerAccountTransactionService.getCustomerTransactions(customerTransactionRequest, headers);
         logger.info("Getting customer transactions - ends");
 
-        if (CollectionUtils.isEmpty(responses)) {
-            logger.error("No transactions found error");
-            throw new NoTransactionException("No Transactions found");
-        }
+//        if (CollectionUtils.isEmpty(responses)) {
+//            logger.error("No transactions found error");
+//            throw new NoTransactionException("No Transactions found");
+//        }
 
         CustomerAccountTransactionResponse catr = this.getTransactionTotal(responses);
         ResponseEntity<CustomerAccountTransactionResponse> responseEntity = new ResponseEntity<CustomerAccountTransactionResponse>(catr, HttpStatus.OK);
@@ -97,9 +99,5 @@ public class CustomerAccountTransactionController {
             throw new BadRequestException("Invalid Month");
         }
 
-        if (customerTransactionRequest.getCustomerId() == null || !customerTransactionRequest.getCustomerId().equals(customerId)) {
-            logger.error("Invalid Customer error");
-            throw new BadRequestException("Invalid Customer");
-        }
     }
 }

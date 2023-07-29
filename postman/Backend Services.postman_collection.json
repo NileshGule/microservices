@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "Get Customer accounts aand transactions",
+			"name": "Get Customer accounts and transactions",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -23,7 +23,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"customerId\": \"P-0123456789\",\n    \"currency\": \"INR\",\n    \"year\": 2023,\n    \"month\" : 10,\n    \"pageNo\": 30,\n    \"pageSize\": 5\n}",
+					"raw": "{\n    \"customerId\": \"P-0123456791\",\n    \"currency\": \"USD\",\n    \"year\": 2020,\n    \"month\" : 10,\n    \"pageNo\": 30,\n    \"pageSize\": 5\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -31,14 +31,53 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:8080/ebanking/customer/transactions",
-					"protocol": "https",
+					"raw": "http://localhost:8080/backend-service/customer/transactions",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"ebanking",
+						"backend-service",
+						"customer",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer accounts and transactions - Invalid Currency",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAiY3VzdG9tZXJJZCI6ICJQLTAxMjM0NTY3ODkiICwgImVtYWlsIjoiZW1wbG95ZWUzQHNwLmNvbSJ9.nLxacDiNrEOcvZ-qlGgJ1ugEGNBxTck2AwFBIwZBsS0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"P-0123456791\",\n    \"currency\": \"INR\",\n    \"year\": 2020,\n    \"month\" : 10,\n    \"pageNo\": 30,\n    \"pageSize\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/backend-service/customer/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"backend-service",
 						"customer",
 						"transactions"
 					]

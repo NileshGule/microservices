@@ -6,6 +6,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
@@ -23,9 +25,9 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-@Slf4j
 public class TransactionDetailDao {
 
+    private static Logger log = LoggerFactory.getLogger(TransactionDetailDao.class);
     private static Map<String, List<TransactionDetails>> transactionDetailsMap ;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

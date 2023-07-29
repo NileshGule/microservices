@@ -1,4 +1,4 @@
-package com.fractionalservices.banking.backend.health;
+package com.fractionalservices.banking.backend;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

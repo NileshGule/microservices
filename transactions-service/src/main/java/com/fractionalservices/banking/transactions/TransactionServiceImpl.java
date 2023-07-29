@@ -1,6 +1,8 @@
 package com.fractionalservices.banking.transactions;
 
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,9 +11,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 public class TransactionServiceImpl{
 
+    private static Logger log = LoggerFactory.getLogger(TransactionServiceImpl.class);
     @Autowired
     private TransactionDetailDao dao;
 

@@ -13,6 +13,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AuthenticationValidationServiceImpl implements AuthenticationValidationService {
@@ -40,7 +41,13 @@ public class AuthenticationValidationServiceImpl implements AuthenticationValida
                     HttpMethod.GET, null,
                     CustomerDetails.class, authorization);
             logger.debug("Authentication token validated ");
-            return new CustomerDetails(responseEntity.getBody().getCustomerId());
+
+            if (!customerId.equalsIgnoreCase(Objects.requireNonNull(responseEntity.getBody()).getCustomerId())){
+                logger.error("Invalid customer error");
+                throw new InvalidCustomerException("Invalid Customer Exception");
+            }
+
+            return new CustomerDetails(customerId);
         } catch (Exception ex) {
             logger.error("Error Authenticating customer:", ex);
             throw new InvalidCustomerException("Invalid Customer");

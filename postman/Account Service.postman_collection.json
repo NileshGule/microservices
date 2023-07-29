@@ -13,7 +13,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/account-service/P-0123456789/INR",
+					"raw": "http://localhost:8082/account-service/P-0123456791/USD",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -21,8 +21,8 @@
 					"port": "8082",
 					"path": [
 						"account-service",
-						"P-0123456789",
-						"INR"
+						"P-0123456791",
+						"USD"
 					]
 				}
 			},

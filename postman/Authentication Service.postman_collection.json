@@ -28,6 +28,11 @@
 						{
 							"key": "token",
 							"value": "P-0123456789eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAiY3VzdG9tZXJJZCI6ICJQLTAxMjM0NTY3ODkiICwgImVtYWlsIjoiZW1wbG95ZWUzQHNwLmNvbSJ9.nLxacDiNrEOcvZ-qlGgJ1ugEGNBxTck2AwFBIwZBsS0"
+						},
+						{
+							"key": null,
+							"value": "",
+							"disabled": true
 						}
 					]
 				}

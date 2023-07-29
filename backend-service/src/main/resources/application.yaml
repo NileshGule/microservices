@@ -38,28 +38,28 @@ tracing:
 #    key-store-type: ${tomcat_key_store_type}
 #    key-alias: ${tomcat_key_store_alias}
 
-authenticate_service_url: http://localhost:8081/sso/authenticate/customer?token={token}
-customer_account_service_customer_url: http://localhost:8082/customer/account/{customerId}
-customer_account_service_customer_currency_url: http://localhost:8082/customer/account/{customerId}/{currency}
-exchange_rate_url: http://localhost:8083/exchange-rate/getAll
-account_transaction_service_url: http://localhost:8084/txn/accountTransactions
+authenticate_service_url: http://localhost:8081/authentication-service/authenticate/token?token={token}
+account_by_customer_url: http://localhost:8082/account-service/{customerId}
+account_by_customer_currency_url: http://localhost:8082/account-service/{customerId}/{currency}
+forex_url: http://localhost:8083/forex-service/rates
+transaction_service_url: http://localhost:8084/transaction-service//accountTransactions
 
 services:
   url:
-    exchange-rate: ${exchange_rate_url}
-    customer-account-service-customer: ${customer_account_service_customer_url}
-    customer-account-service-customer-currency: ${customer_account_service_customer_currency_url}
-    account-transaction-service: ${account_transaction_service_url}
     authenticate-service: ${authenticate_service_url}
-
-
-
-logging:
-  file:
-    name: application.log
-    path: /logs/
-  level:
-    root: info
-    org.springframework: error
-    org.hibernate: error
-    com.mycompany.api: info
+    customer-account-service-customer: ${account_by_customer_url}
+    customer-account-service-customer-currency: ${account_by_customer_currency_url}
+    exchange-rate: ${forex_url}
+    account-transaction-service: ${transaction_service_url}
+#
+#
+#
+#logging:
+#  file:
+#    name: application.log
+#    path: /logs/
+#  level:
+#    root: info
+#    org.springframework: error
+#    org.hibernate: error
+#    com.mycompany.api: info
