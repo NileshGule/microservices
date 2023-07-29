@@ -20,7 +20,7 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${services.url.customer-account-service-customer-currency}")
+    @Value("${services.url.account-service-customer-currency}")
     private String customerAccountServiceCustomerCurrencyUrl;
 
     @Override
