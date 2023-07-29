@@ -1,14 +1,14 @@
 {
 	"info": {
-		"_postman_id": "bcec7ada-4ea1-4f9d-a2b8-088eebc52067",
+		"_postman_id": "75c1edd9-311d-438c-ad0f-4d9f59fd428a",
 		"name": "Forex Service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1906397",
-		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-bcec7ada-4ea1-4f9d-a2b8-088eebc52067?action=share&creator=1906397&source=collection_link"
+		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-75c1edd9-311d-438c-ad0f-4d9f59fd428a?action=share&creator=1906397&source=collection_link"
 	},
 	"item": [
 		{
-			"name": "localhost:8083/forex/rates",
+			"name": "Rates",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -35,6 +35,26 @@
 					"path": [
 						"forex",
 						"rates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forex Version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/forex/version",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"forex",
+						"version"
 					]
 				}
 			},

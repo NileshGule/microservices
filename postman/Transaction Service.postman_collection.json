@@ -1,12 +1,32 @@
 {
 	"info": {
-		"_postman_id": "07ab17c5-4386-4dd5-9c60-de1ca2d5272f",
+		"_postman_id": "3160c55b-58fe-48d5-8975-ba400d4870b0",
 		"name": "Transaction Service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1906397",
-		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-07ab17c5-4386-4dd5-9c60-de1ca2d5272f?action=share&creator=1906397&source=collection_link"
+		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-3160c55b-58fe-48d5-8975-ba400d4870b0?action=share&creator=1906397&source=collection_link"
 	},
 	"item": [
+		{
+			"name": "Transaction Version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/txn/version",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"txn",
+						"version"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Get Transactions",
 			"request": {

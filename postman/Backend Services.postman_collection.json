@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "96c6fdbd-36b3-4e32-82bb-4a56d9070564",
+		"name": "Backend Services",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1906397",
+		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-96c6fdbd-36b3-4e32-82bb-4a56d9070564?action=share&creator=1906397&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Get Customer All Accounts all transaction first page",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAiY3VzdG9tZXJJZCI6ICJQLTAxMjM0NTY3ODkiICwgImVtYWlsIjoiZW1wbG95ZWUzQHNwLmNvbSJ9.nLxacDiNrEOcvZ-qlGgJ1ugEGNBxTck2AwFBIwZBsS0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"P-0123456789\",\n    \"currency\": \"INR\",\n    \"year\": 2023,\n    \"month\" : 10,\n    \"pageNo\": 30,\n    \"pageSize\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8080/ebanking/customer/transactions",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ebanking",
+						"customer",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Backend Version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/txn/version",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"txn",
+						"version"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
