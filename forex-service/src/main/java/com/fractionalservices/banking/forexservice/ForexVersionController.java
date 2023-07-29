@@ -5,8 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Slf4j
-public class ForexHealthController {
+public class ForexVersionController {
+
+    private static final Logger log = LoggerFactory.getLogger(ForexVersionController.class);
     @GetMapping("/version")
     public String getVersion() {
         log.info("Get Version for forex");

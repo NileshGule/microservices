@@ -1,5 +1,7 @@
 package com.fractionalservices.banking.account;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,13 +13,16 @@ import java.util.stream.Collectors;
 @Service
 public class AccountService {
 
+    private static final Logger log = LoggerFactory.getLogger(AccountService.class);
+
     private static Map<String, List<AccountDetails>> customerAccountMap;
 
     static {
-        initialiseCustomerAccointMap();
+        initialiseCustomerAccountMap();
     }
 
-    public static void initialiseCustomerAccointMap(){
+    public static void initialiseCustomerAccountMap(){
+        log.info("Initialise Customer account map");
         customerAccountMap = new HashMap<>();
         String customer1 = "P-0123456789";
         List<AccountDetails> cust1AccountList = new ArrayList<>();
@@ -37,11 +42,16 @@ public class AccountService {
         List<AccountDetails> cust3AccountList = new ArrayList<>();
         cust3AccountList.add(new AccountDetails("acct_id_9", "", "USD"));
         customerAccountMap.put(customer3, cust3AccountList);
+
+        log.info("Three customers are initialised with id and accounts");
     }
 
-    public AccountDetails getCustomerAccountDetails(String customerId, String currency) {
+    public AccountDetails getAccountDetailsByCustomer(String customerId, String currency) {
 
-        List<AccountDetails> accountDetails = this.getCustomerAccountDetails(customerId);
+        log.info("Start get Account by CustomerID : {} and Currency: {} ", customerId, currency);
+
+        List<AccountDetails> accountDetails = this.getAccountDetailsByCustomer(customerId);
+        log.info("No of Accounts for the customer/currency : {}", accountDetails.size());
 
         return
                 customerAccountMap.get(customerId).stream()
@@ -52,10 +62,12 @@ public class AccountService {
                         .collect(Collectors.toList()).get(0);
     }
 
-    public List<AccountDetails> getCustomerAccountDetails(String customerId) {
+    public List<AccountDetails> getAccountDetailsByCustomer(String customerId) {
+
+        log.info("Start get Account by CustomerID : {}", customerId);
 
         if (customerAccountMap == null) {
-            initialiseCustomerAccointMap();
+            initialiseCustomerAccountMap();
         }
 
         return customerAccountMap.get(customerId);
