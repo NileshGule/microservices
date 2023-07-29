@@ -5,15 +5,12 @@ import com.fractionalservices.banking.backend.authentication.AuthenticationValid
 import com.fractionalservices.banking.backend.authentication.CustomerDetails;
 import com.fractionalservices.banking.backend.authentication.InvalidCustomerException;
 import com.fractionalservices.banking.backend.exception.BadRequestException;
-import com.fractionalservices.banking.backend.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.NoTransactionException;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -36,7 +33,7 @@ public class CustomerAccountTransactionController {
     public ResponseEntity<CustomerAccountTransactionResponse> getCustomerTransactions(
             @RequestBody CustomerTransactionRequest customerTransactionRequest,
             @RequestHeader HttpHeaders headers)
-            throws BadRequestException, NoTransactionException, InvalidCustomerException, com.fractionalservices.banking.backend.transaction.NoTransactionException {
+            throws BadRequestException, InvalidCustomerException, com.fractionalservices.banking.backend.transaction.NoTransactionException {
         logger.debug("Get Customer Transactions start");
 
         // Authentication Validation
