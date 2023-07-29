@@ -1,13 +1,13 @@
-package com.fractionalservices.banking.sso;
+package com.fractionalservices.banking.authentication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SsoApplication {
+public class AuthenticationApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SsoApplication.class, args);
+		SpringApplication.run(AuthenticationApplication.class, args);
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.fractionalservices.banking.sso.entity;
+package com.fractionalservices.banking.authentication;
 
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CustomerDetails {
+public class AuthenticationDetails {
     private String customerId;
     private String email;
 

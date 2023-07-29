@@ -21,7 +21,7 @@
         <module>backend</module>
         <module>account</module>
         <module>forex-service</module>
-        <module>sso</module>
+        <module>authentication</module>
         <module>transactions</module>
     </modules>
 

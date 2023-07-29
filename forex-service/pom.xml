@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>forex-service</artifactId>
 	<version>1.0</version>
-	<name>Mock Exchange Rate Data</name>
+	<name>Forex Service</name>
 
 	<parent>
 		<groupId>com.fractionalservices</groupId>

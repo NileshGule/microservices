@@ -10,7 +10,7 @@
 
     <artifactId>transactions</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Mock Transaction Data</name>
+    <name>Transaction Service</name>
     <description>Transaction APIs for banking application</description>
 
     <dependencies>

@@ -1,0 +1,23 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /authentication
+
+spring:
+  application:
+    name: authentication-service
+  sleuth:
+    otel:
+      config:
+        trace-id-ratio-based: 1.0
+      exporter:
+        otlp:
+          endpoint: http://localhost:4317
+
+tracing:
+  url: http://localhost:4318/v1/traces
+
+  management:
+    tracing:
+      sampling:
+        probability: 1.0
