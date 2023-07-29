@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "bcec7ada-4ea1-4f9d-a2b8-088eebc52067",
+		"name": "Forex Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1906397",
+		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-bcec7ada-4ea1-4f9d-a2b8-088eebc52067?action=share&creator=1906397&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "localhost:8083/forex/rates",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"strictSSL": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8083/forex/rates",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"forex",
+						"rates"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

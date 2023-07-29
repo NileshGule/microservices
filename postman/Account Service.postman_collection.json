@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "3660fd3e-6d97-42f6-b1b1-4cc3760b5c77",
+		"name": "Account Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1906397",
+		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-3660fd3e-6d97-42f6-b1b1-4cc3760b5c77?action=share&creator=1906397&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Get Customer Accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/account/P-0123456789/INR",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"account",
+						"P-0123456789",
+						"INR"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Account Version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/account/version",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"account",
+						"version"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

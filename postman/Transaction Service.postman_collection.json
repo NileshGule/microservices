@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "07ab17c5-4386-4dd5-9c60-de1ca2d5272f",
+		"name": "Transaction Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1906397",
+		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-07ab17c5-4386-4dd5-9c60-de1ca2d5272f?action=share&creator=1906397&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Get Transactions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"acctNumber\": \"acct_id_1\",\n    \"txnYear\": 2020,\n    \"txnMonth\" : 10,\n    \"startPage\": 0,\n    \"pageSize\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/txn/accountTransactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"txn",
+						"accountTransactions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
