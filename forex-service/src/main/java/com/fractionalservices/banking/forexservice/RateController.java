@@ -6,13 +6,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
@@ -24,10 +30,16 @@ public class RateController {
     @GetMapping("/rates")
     public Map<String, Double> getAll() throws IOException, URISyntaxException {
         log.info("Start get forex rates");
-        Path path = Paths.get(getClass().getClassLoader()
-                .getResource("forex-data.csv").toURI());
+//        Path path = Paths.get(getClass().getClassLoader()
+//                .getResource("forex-data.csv").toURI());
+//        Stream<String> lines = Files.lines(path);
 
-        Stream<String> lines = Files.lines(path);
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("forex-data.csv");
+        assert inputStream != null;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        List<String> allLines = reader.lines().toList();
+        Stream<String> lines = allLines.stream();
+
         Map<String, Double> map = new HashMap<>();
         lines.forEach( line -> {
             line = line.toUpperCase();

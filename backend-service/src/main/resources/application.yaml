@@ -1,14 +1,17 @@
+spring:
+  application:
+    name: backend-service
+#  sleuth:
+#    otel:
+#      config:
+#        trace-id-ratio-based: 1.0
+#      exporter:
+#        otlp:
+#          endpoint: http://localhost:4317
+
 server:
   servlet:
     context-path: /backend-service
-
-springdoc:
-  api-docs:
-    path: /api-docs
-  swagger-ui:
-    path: /swagger.html
-    operationsSorter: method
-
 
 services:
   endpoint:
@@ -16,7 +19,6 @@ services:
     account: http://localhost:8082
     forex: http://localhost:8083
     transaction: http://localhost:8084
-
   url:
     authenticate-service: ${services.endpoint.authenticate}/authentication-service/authenticate/token?token={token}
     account-service-customer: ${services.endpoint.account}/account-service/{customerId}
@@ -24,20 +26,8 @@ services:
     exchange-rate: ${services.endpoint.forex}/forex-service/rates
     account-transaction-service: ${services.endpoint.transaction}/transaction-service//accountTransactions
 
-spring:
-  application:
-    name: backend-service
-  sleuth:
-    otel:
-      config:
-        trace-id-ratio-based: 1.0
-      exporter:
-        otlp:
-          endpoint: http://localhost:4317
-
 tracing:
-  url: http://localhost:4317/v1/traces
-
+  url: http://localhost:4318/v1/traces
   management:
     tracing:
       sampling:

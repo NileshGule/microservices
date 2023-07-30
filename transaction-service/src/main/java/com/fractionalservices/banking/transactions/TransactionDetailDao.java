@@ -8,12 +8,16 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -23,12 +27,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class TransactionDetailDao {
 
     private static Logger log = LoggerFactory.getLogger(TransactionDetailDao.class);
-    private static Map<String, List<TransactionDetails>> transactionDetailsMap ;
+    private static Map<String, List<TransactionDetails>> transactionDetailsMap;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -43,20 +48,24 @@ public class TransactionDetailDao {
 
         try {
             log.info("Reading data from file");
-            URL res = getClass().getClassLoader().getResource("transactions.json");
-            File file = Paths.get(res.toURI()).toFile();
-            JSONArray txns = (JSONArray) parser.parse(new FileReader(file));
+
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("transactions.json");
+            assert inputStream != null;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String contents = reader.lines().collect(Collectors.joining(System.lineSeparator()));
+            JSONArray txns = (JSONArray) parser.parse(contents);
+
 
             txns.forEach(txnObj -> {
                 TransactionDetails details = parseToTransactionDetails((JSONObject) txnObj);
                 List<TransactionDetails> transactionDetails = transactionDetailsMap.get(details.getAcctNumber());
-                if(transactionDetails == null){
+                if (transactionDetails == null) {
                     transactionDetails = new ArrayList<>();
                 }
                 transactionDetails.add(details);
                 transactionDetailsMap.put(details.getAcctNumber(), transactionDetails);
             });
-        } catch (IOException | ParseException | URISyntaxException e) {
+        } catch (ParseException e) {
             log.error("Error getting the transaction details : ", e);
         }
         return transactionDetailsMap;

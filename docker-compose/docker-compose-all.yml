@@ -27,6 +27,10 @@ services:
     image: account-service
     ports:
       - 8082:8082
+  backend-service:
+    image: backend-service
+    ports:
+      - 8080:8080
   forex-service:
     image: forex-service
     ports:
@@ -35,10 +39,6 @@ services:
     image: transaction-service
     ports:
       - 8084:8084
-  backend-service:
-    image: backend-service
-    ports:
-      - 8080:8080
 
 
 

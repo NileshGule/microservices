@@ -6,13 +6,13 @@ server:
 spring:
   application:
     name: account-service
-  sleuth:
-    otel:
-      config:
-        trace-id-ratio-based: 1.0
-      exporter:
-        otlp:
-          endpoint: http://localhost:4317
+#  sleuth:
+#    otel:
+#      config:
+#        trace-id-ratio-based: 1.0
+#      exporter:
+#        otlp:
+#          endpoint: http://localhost:4317
 
 tracing:
   url: http://localhost:4318/v1/traces

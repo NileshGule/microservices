@@ -1,4 +1,6 @@
-authenticate_service_endpoint: http://localhost:8081
-account_service_endpoint: http://localhost:8082
-forex_service_endpoint: http://localhost:8083
-transaction_service_endpoint: http://localhost:8084
+services:
+  endpoint:
+    authenticate: http://authentication-service:8081
+    account: http://account-service:8082
+    forex: http://forex-service:8083
+    transaction: http://transaction-service:8084
