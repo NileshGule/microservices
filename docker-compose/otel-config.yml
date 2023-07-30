@@ -39,8 +39,6 @@ exporters:
 #      enable_open_metrics: true
 
 
-#exporters:
-#  logging:
 #
 #processors:
 #  batch:
@@ -61,8 +59,8 @@ service:
       processors: [ batch ]
       exporters:  [ logging, jaeger ] # [otlp, logging, spanmetrics]
     metrics:
-      receivers: [ otlp, spanmetrics ]
-      processors: [ filter, batch ]
+      receivers: [ otlp ] # spanmetrics
+#      processors: [ filter, batch ]
       exporters: [ logging ] # [prometheus, logging]
     logs:
       receivers: [ otlp ]
