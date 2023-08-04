@@ -15,6 +15,5 @@
 
     <properties>
         <java.version>20</java.version>
-        <map-struct.version>1.5.5.Final</map-struct.version>
     </properties>
 </project>

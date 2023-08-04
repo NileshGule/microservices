@@ -1,20 +1,20 @@
 package com.fractionalservices.banking.backend.configuration;
 
-import io.opentelemetry.exporter.otlp.http.trace.OtlpHttpSpanExporter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+//import io.opentelemetry.exporter.otlp.http.trace.OtlpHttpSpanExporter;
+//import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.context.annotation.Primary;
 
-@Configuration
+//@Configuration
 public class OtelConfiguration {
-
-    @Bean
-    @Primary
-    OtlpHttpSpanExporter otlpHttpSpanExporter(@Value("${tracing.url}") String url) {
-        return OtlpHttpSpanExporter.builder()
-                .setEndpoint(url)
-                .build();
-    }
+//
+//    @Bean
+//    @Primary
+//    OtlpHttpSpanExporter otlpHttpSpanExporter(@Value("${tracing.url}") String url) {
+//        return OtlpHttpSpanExporter.builder()
+//                .setEndpoint(url)
+//                .build();
+//    }
 
 }
