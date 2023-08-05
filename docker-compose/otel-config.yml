@@ -28,10 +28,10 @@ exporters:
     tls:
       insecure: true
 
-#  otlp:
-#    endpoint: "jaeger:4317"
-#    tls:
-#      insecure: true
+  otlp:
+    endpoint: "jaeger-service:4317"
+    tls:
+      insecure: true
 #    prometheus:
 #      endpoint: "otelcol:9464"
 #      resource_to_telemetry_conversion:

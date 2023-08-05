@@ -2,30 +2,27 @@ version: '3.9'
 services:
   jaeger-service:
     image: jaegertracing/all-in-one:latest
+    container_name: jaeger-service
     ports:
-      - "16686:16686"
       - "14250:14250"
+      - "16686:16686"
     environment:
       - COLLECTOR_OTLP_ENABLED=true
 
-  collector:
+  otel-collector:
     image: otel/opentelemetry-collector:0.72.0
+    container_name: otel-collector
     command: [ "--config=/etc/otel-collector-config.yml" ]
     volumes:
       - ./otel-config.yml:/etc/otel-collector-config.yml
     ports:
       - "4317:4317"
+      - "4318:4318"
+      - "8888"
     depends_on:
       - jaeger-service
 
-  authentication-service:
-    image: authentication-service
-    ports:
-      - "8081:8081"
-  account-service:
-    image: account-service
-    ports:
-      - "8082:8082"
+
   backend-service:
     image: backend-service
     container_name: backend-service
@@ -36,17 +33,35 @@ services:
       - -c
       - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar --spring.profiles.active=k8s
     environment:
-      - OTEL_SERVICE_NAME=backend-service
-      - OTEL_LOGS_EXPORTER=otlp
-      - OTEL_TRACES_EXPORTER=jaeger
-      - OTEL_METRICS_EXPORTER=none
-      - OTEL_EXPORTER_JAEGER_ENDPOINT=http://jaeger-service:14250
-      - OTEL_EXPORTER_OTLP_ENDPOINT=http://collector:4317
-      - OTEL_EXPORTER_JAEGER_TIMEOUT=40000
+      OTEL_SERVICE_NAME: "backend-service"
+      OTEL_LOGS_EXPORTER: "otlp"
+      OTEL_METRICS_EXPORTER: "none"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4317" #http://jaeger-service:14250
+      OTEL_TRACES_EXPORTER: jaeger
+      OTEL_EXPORTER_JAEGER_ENDPOINT: "http://jaeger-service:14250" #http://jaeger-service:14250/v1/traces
+      OTEL_EXPORTER_JAEGER_TIMEOUT: 10000
+    depends_on:
+      - otel-collector
+
+
+  authentication-service:
+    image: authentication-service
+    ports:
+      - "8081:8081"
+
+
+  account-service:
+    image: account-service
+    ports:
+      - "8082:8082"
+
+
   forex-service:
     image: forex-service
     ports:
       - "8083:8083"
+
+
   transaction-service:
     image: transaction-service
     ports:
