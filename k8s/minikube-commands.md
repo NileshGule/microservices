@@ -28,8 +28,9 @@ $ minikube image ls --format table
 
 # Exposing services to outside world
 ```shell
-$ k expose deployment ms-deployments --dry-run=client -o yaml > services.yml
-$ k apply -f services.yml
 $ minikube service backend-service-deployment
+
+# In another terminal
+$ minikube service jaeger-service-deployment
 ```
 `

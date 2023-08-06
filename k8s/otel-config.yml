@@ -8,15 +8,6 @@ receivers:
             - "http://*"
             - "https://*"
 
-################# Wildcard Option 1 ################
-#          allowed_origins: [ "*" ]
-
-################# Individual services ################
-#          - https://localhost:8080
-#          - https://localhost:3000
-#          - http://localhost:3000
-##          allowed_headers: [ "*" ]
-
 processors:
   batch:
 
@@ -32,25 +23,6 @@ exporters:
     endpoint: "jaeger-service:4317"
     tls:
       insecure: true
-#    prometheus:
-#      endpoint: "otelcol:9464"
-#      resource_to_telemetry_conversion:
-#        enabled: true
-#      enable_open_metrics: true
-
-
-#
-#processors:
-#  batch:
-#  filter:
-#    metrics:
-#      exclude:
-#        match_type: strict
-#        metric_names:
-#          - queueSize
-#
-#connectors:
-#  spanmetrics:
 
 service:
   pipelines:
@@ -60,7 +32,6 @@ service:
       exporters:  [ logging, jaeger ] # [otlp, logging, spanmetrics]
     metrics:
       receivers: [ otlp ] # spanmetrics
-#      processors: [ filter, batch ]
       exporters: [ logging ] # [prometheus, logging]
     logs:
       receivers: [ otlp ]
