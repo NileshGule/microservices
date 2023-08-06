@@ -1,6 +1,6 @@
 services:
   endpoint:
-    authenticate: http://authentication-service:8081
-    account: http://account-service:8082
-    forex: http://forex-service:8083
-    transaction: http://transaction-service:8084
+    authenticate: http://${AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_HOST}:${AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_PORT}
+    account: http://${ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_HOST}:${ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_PORT}
+    forex: http://${FOREX_SERVICE_DEPLOYMENT_SERVICE_HOST}:${FOREX_SERVICE_DEPLOYMENT_SERVICE_PORT}
+    transaction: http://${TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_HOST}:${TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_PORT}
