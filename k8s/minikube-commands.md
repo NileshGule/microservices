@@ -30,6 +30,6 @@ $ minikube image ls --format table
 ```shell
 $ k expose deployment ms-deployments --dry-run=client -o yaml > services.yml
 $ k apply -f services.yml
-$ minikube service ms-deployments
+$ minikube service backend-service-deployment
 ```
 `

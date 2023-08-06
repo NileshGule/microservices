@@ -57,16 +57,7 @@ spec:
             value: "10000"
           - name: "JAVA_OPTS"
             value: "-javaagent:/app/opentelemetry-javaagent.jar"
-#          - name: "services.endpoint.authenticate"
-#            value: "${AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_HOST}:${AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_PORT}"
-#          - name: "services.endpoint.account"
-#            value: "${ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_HOST}:${ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_PORT}"
-#          - name: "services.endpoint.forex"
-#            value: "${FOREX_SERVICE_DEPLOYMENT_SERVICE_HOST}:${FOREX_SERVICE_DEPLOYMENT_SERVICE_PORT}"
-#          - name: "services.endpoint.transaction"
-#            value: "${TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_HOST}:${TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_PORT}"
         command:
           - /bin/bash
           - -c
           - java --add-opens java.base/java.lang=ALL-UNNAMED -jar /app/app.jar --spring.profiles.active=k8s
-
