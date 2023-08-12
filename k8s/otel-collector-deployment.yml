@@ -39,7 +39,7 @@ data:
       logging:
         loglevel: debug
       jaeger:
-        endpoint: "http://jaeger-service:14250"
+        endpoint: "http://jaeger-service-deployment:14250"
         tls:
           insecure: true
     
