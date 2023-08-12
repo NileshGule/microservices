@@ -14,7 +14,7 @@ $ eval $(minikube docker-env)
 ## Rebuild you docker images again from the same sheell terminal session
 ```shell
 $ cd ..
-$ cd ./docker-scripts/all.sh
+$ cd ./docker-scripts/all.ps1
 $ cd k8s
 ```
 `
