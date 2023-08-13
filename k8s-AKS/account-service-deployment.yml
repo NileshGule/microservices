@@ -9,9 +9,10 @@ metadata:
 spec:
   ports:
     - port: 8082
+      name: metrics-port
       protocol: TCP
-      targetPort: 8082
-      nodePort: 30003
+      targetPort: 8080
+#      nodePort: 30003
   selector:
     app: account-service-deployment
   type: ClusterIP
@@ -38,8 +39,22 @@ spec:
         image: nileshgule/account-service
         imagePullPolicy: Always
         ports:
-          - name: port-acct-svc
-            containerPort: 8082
+#          - name: port-acct-svc
+          - name: metrics-port
+            containerPort: 8080
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /actuator/health/liveness
+          initialDelaySeconds: 30
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 8080
+            path: /actuator/health/readiness
+          initialDelaySeconds: 45
+          periodSeconds: 5
+          failureThreshold: 5
         env:
           - name: "JAVA_OPTS"
             value: "-javaagent:/app/opentelemetry-javaagent.jar"

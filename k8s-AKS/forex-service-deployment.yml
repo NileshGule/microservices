@@ -11,7 +11,7 @@ spec:
     - port: 8083
       protocol: TCP
       targetPort: 8083
-      nodePort: 30004
+#      nodePort: 30004
   selector:
     app: forex-service-deployment
   type: ClusterIP
