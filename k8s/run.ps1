@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Configmap
 kubectl create configmap otel-collector-configmap  --from-file otel-config.yml
 
@@ -10,6 +8,5 @@ kubectl apply -f account-service-deployment.yml
 kubectl apply -f authentication-service-deployment.yml
 kubectl apply -f forex-service-deployment.yml
 kubectl apply -f transaction-service-deployment.yml
-
 
 kubectl apply -f otel-collector-service-deployment.yml

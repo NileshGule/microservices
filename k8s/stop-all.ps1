@@ -1,1 +1,4 @@
-kubectl delete -R -f .
+kubectl delete `
+    --ignore-not-found `
+    --recursive `
+    --filename .
