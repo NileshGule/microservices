@@ -1,0 +1,50 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: authentication-service-deployment
+  name: authentication-service-deployment
+spec:
+  ports:
+    - port: 8081
+      protocol: TCP
+      targetPort: 8081
+      nodePort: 30002
+  selector:
+    app: authentication-service-deployment
+  type: ClusterIP
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentication-service-deployment
+  labels: 
+    app: authentication-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentication-service-deployment
+  template:
+    metadata:
+      labels:
+        app: authentication-service-deployment
+    spec:
+      containers:
+      - name: authentication-service
+        image: nilieshgule/authentication-service
+        imagePullPolicy: Always
+        ports:
+          - name: port-auth-svc
+            containerPort: 8081
+        env:
+          - name: "JAVA_OPTS"
+            value: "-javaagent:/app/opentelemetry-javaagent.jar"
+        command:
+          - /bin/bash
+          - -c
+          - java --add-opens java.base/java.lang=ALL-UNNAMED -jar /app/app.jar --spring.profiles.active=k8s
