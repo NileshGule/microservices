@@ -57,6 +57,22 @@ spec:
             value: "10000"
           - name: "JAVA_OPTS"
             value: "-javaagent:/app/opentelemetry-javaagent.jar"
+          - name: "AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_HOST"
+            value: "authentication-service"
+          - name: "AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_PORT"
+            value: "8081"
+          - name: "ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_HOST"
+            value: "account-service"
+          - name: "ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_PORT"
+            value: "8082"
+          - name: "FOREX_SERVICE_DEPLOYMENT_SERVICE_HOST"
+            value: "forex-service"
+          - name: "FOREX_SERVICE_DEPLOYMENT_SERVICE_PORT"
+            value: "8083"
+          - name: "TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_HOST"
+            value: "transaction-service"
+          - name: "TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_PORT"
+            value: "8084"
         command:
           - /bin/bash
           - -c
