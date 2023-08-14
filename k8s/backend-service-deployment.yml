@@ -55,8 +55,8 @@ spec:
             value: "http://jaeger-service-deployment:14250"
           - name: "OTEL_EXPORTER_JAEGER_TIMEOUT"
             value: "10000"
-          - name: "JAVA_OPTS"
-            value: "-javaagent:/app/opentelemetry-javaagent.jar"
+
+          # ADD SERVICE URL PARAMS
           - name: "AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_HOST"
             value: "authentication-service"
           - name: "AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_PORT"
