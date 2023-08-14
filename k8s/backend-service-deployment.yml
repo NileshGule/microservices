@@ -58,19 +58,19 @@ spec:
 
           # ADD SERVICE URL PARAMS
           - name: "AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_HOST"
-            value: "authentication-service"
+            value: "authentication-service-deployment"
           - name: "AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_PORT"
             value: "8081"
           - name: "ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_HOST"
-            value: "account-service"
+            value: "account-service-deployment"
           - name: "ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_PORT"
             value: "8082"
           - name: "FOREX_SERVICE_DEPLOYMENT_SERVICE_HOST"
-            value: "forex-service"
+            value: "forex-service-deployment"
           - name: "FOREX_SERVICE_DEPLOYMENT_SERVICE_PORT"
             value: "8083"
           - name: "TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_HOST"
-            value: "transaction-service"
+            value: "transaction-service-deployment"
           - name: "TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_PORT"
             value: "8084"
         command:
