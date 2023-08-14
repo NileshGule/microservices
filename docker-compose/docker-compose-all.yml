@@ -65,6 +65,10 @@ services:
     build:
       context: ../
       dockerfile: authentication-service/Dockerfile
+    entrypoint:
+      - /bin/bash
+      - -c
+      - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar
     ports:
       - "8081:8081"
 
@@ -74,6 +78,10 @@ services:
     build:
       context: ../
       dockerfile: account-service/Dockerfile
+    entrypoint:
+      - /bin/bash
+      - -c
+      - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar
     ports:
       - "8082:8082"
 
@@ -83,6 +91,10 @@ services:
     build:
       context: ../
       dockerfile: forex-service/Dockerfile
+    entrypoint:
+      - /bin/bash
+      - -c
+      - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar
     ports:
       - "8083:8083"
 
@@ -92,6 +104,10 @@ services:
     build:
       context: ../
       dockerfile: transaction-service/Dockerfile
+    entrypoint:
+      - /bin/bash
+      - -c
+      - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar
     ports:
       - "8084:8084"
 
