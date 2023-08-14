@@ -1,7 +1,7 @@
 #!/bin/bash
 
-./account-service.sh
-./authentication-service.sh
-./backend-service.sh
-./forex-service.sh
-./transaction-service.sh
+./docker-scripts/account-service.sh
+./docker-scripts/authentication-service.sh
+./docker-scripts/backend-service.sh
+./docker-scripts/forex-service.sh
+./docker-scripts/transaction-service.sh

@@ -1,30 +1,33 @@
 version: '3.9'
 services:
-  jaeger-service:
-    image: jaegertracing/all-in-one:latest
-    container_name: jaeger-service
-    ports:
-      - "14250:14250"
-      - "16686:16686"
-    environment:
-      - COLLECTOR_OTLP_ENABLED=true
-
-  otel-collector:
-    image: otel/opentelemetry-collector:0.72.0
-    container_name: otel-collector
-    command: [ "--config=/etc/otel-collector-config.yml" ]
-    volumes:
-      - ./otel-config.yml:/etc/otel-collector-config.yml
-    ports:
-      - "4317:4317"
-      - "4318:4318"
-      - "8888"
-    depends_on:
-      - jaeger-service
+#  jaeger-service:
+#    image: jaegertracing/all-in-one:latest
+#    container_name: jaeger-service
+#    ports:
+#      - "14250:14250"
+#      - "16686:16686"
+#    environment:
+#      - COLLECTOR_OTLP_ENABLED=true
+#
+#  otel-collector:
+#    image: otel/opentelemetry-collector:0.72.0
+#    container_name: otel-collector
+#    command: [ "--config=/etc/otel-collector-config.yml" ]
+#    volumes:
+#      - ./otel-config.yml:/etc/otel-collector-config.yml
+#    ports:
+#      - "4317:4317"
+#      - "4318:4318"
+#      - "8888"
+#    depends_on:
+#      - jaeger-service
 
 
   backend-service:
     image: backend-service
+    build:
+      context: ../
+      dockerfile: backend-service/Dockerfile
     container_name: backend-service
     ports:
       - "8080:8080"
@@ -33,6 +36,14 @@ services:
       - -c
       - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar --spring.profiles.active=k8s
     environment:
+      AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_HOST: "authentication-service"
+      AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_PORT: 8081
+      ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_HOST: "account-service"
+      ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_PORT: 8082
+      FOREX_SERVICE_DEPLOYMENT_SERVICE_HOST: "forex-service"
+      FOREX_SERVICE_DEPLOYMENT_SERVICE_PORT: 8083
+      TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_HOST: "transaction-service"
+      TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_PORT: 8084
       OTEL_SERVICE_NAME: "backend-service"
       OTEL_LOGS_EXPORTER: "otlp"
       OTEL_METRICS_EXPORTER: "none"
@@ -41,29 +52,46 @@ services:
       OTEL_EXPORTER_JAEGER_ENDPOINT: "http://jaeger-service:14250" #http://jaeger-service:14250/v1/traces
       OTEL_EXPORTER_JAEGER_TIMEOUT: 10000
     depends_on:
-      - otel-collector
+      - authentication-service
+      - account-service
+      - forex-service
+      - transaction-service
+#     - otel-collector
+
 
 
   authentication-service:
     image: authentication-service
+    build:
+      context: ../
+      dockerfile: authentication-service/Dockerfile
     ports:
       - "8081:8081"
 
 
   account-service:
     image: account-service
+    build:
+      context: ../
+      dockerfile: account-service/Dockerfile
     ports:
       - "8082:8082"
 
 
   forex-service:
     image: forex-service
+    build:
+      context: ../
+      dockerfile: forex-service/Dockerfile
     ports:
       - "8083:8083"
 
 
   transaction-service:
     image: transaction-service
+    build:
+      context: ../
+      dockerfile: transaction-service/Dockerfile
     ports:
       - "8084:8084"
 

@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -f ../account-service/Dockerfile -t account-service ../account-service
+docker build -f account-service/Dockerfile -t account-service account-service
