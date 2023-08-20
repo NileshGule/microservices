@@ -39,7 +39,7 @@ spec:
         image: docker.io/library/backend-service
         imagePullPolicy: Never
         ports:
-          - name: port-be-svc
+          - name: app-port
             containerPort: 8080
         env:
           - name: "OTEL_SERVICE_NAME"
@@ -78,3 +78,16 @@ spec:
           - /bin/bash
           - -c
           - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar  -jar /app/app.jar --spring.profiles.active=k8s
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /backend-service/actuator/health/liveness
+          initialDelaySeconds: 30
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 8080
+            path: /backend-service/actuator/health/readiness
+          initialDelaySeconds: 45
+          periodSeconds: 5
+          failureThreshold: 5

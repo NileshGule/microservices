@@ -13,10 +13,10 @@ spec:
       name: metrics-port
       protocol: TCP
       targetPort: 8082
-#      nodePort: 30003
+      nodePort: 30003
   selector:
     app: account-service-deployment
-  type: ClusterIP
+  type: NodePort
 
 ---
 apiVersion: apps/v1
@@ -40,7 +40,7 @@ spec:
         image: docker.io/library/account-service
         imagePullPolicy: Never
         ports:
-          - name: metrics-port
+          - name: app-port
             containerPort: 8082
         command:
           - /bin/bash
@@ -49,13 +49,13 @@ spec:
         livenessProbe:
           httpGet:
             port: 8082
-            path: /actuator/health/liveness
+            path: /account-service/actuator/health/liveness
           initialDelaySeconds: 30
           periodSeconds: 5
         readinessProbe:
           httpGet:
             port: 8082
-            path: /actuator/health/readiness
+            path: /account-service/actuator/health/readiness
           initialDelaySeconds: 45
           periodSeconds: 5
           failureThreshold: 5

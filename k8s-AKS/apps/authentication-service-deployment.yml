@@ -40,9 +40,22 @@ spec:
         image: docker.io/library/authentication-service
         imagePullPolicy: Never
         ports:
-          - name: port-auth-svc
+          - name: app-port
             containerPort: 8081
         command:
           - /bin/bash
           - -c
           - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar  -jar /app/app.jar --spring.profiles.active=k8s
+        livenessProbe:
+          httpGet:
+            port: 8081
+            path: /authentication-service/actuator/health/liveness
+          initialDelaySeconds: 30
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 8081
+            path: /authentication-service/actuator/health/readiness
+          initialDelaySeconds: 45
+          periodSeconds: 5
+          failureThreshold: 5
