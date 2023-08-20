@@ -109,6 +109,7 @@ spec:
             - "--config=/conf/otel-collector-config.yaml"
 #            - "--mem-ballast-size-mib=683"
           image: otel/opentelemetry-collector:0.72.0
+          imagePullPolicy: Never
           name: otel-collector-deployment
           ports:
             - containerPort: 4317 # Default endpoint for otlp receiver.

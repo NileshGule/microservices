@@ -38,7 +38,7 @@ spec:
       containers:
       - name: authentication-service
         image: docker.io/library/authentication-service
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         ports:
           - name: port-auth-svc
             containerPort: 8081

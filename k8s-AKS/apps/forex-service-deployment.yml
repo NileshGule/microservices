@@ -37,7 +37,7 @@ spec:
       containers:
       - name: forex-service
         image: docker.io/library/forex-service
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         ports:
           - name: port-fx-svc
             containerPort: 8083

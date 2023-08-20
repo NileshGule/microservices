@@ -37,7 +37,7 @@ spec:
       containers:
       - name: transaction-service
         image: docker.io/library/transaction-service
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         ports:
           - name: port-txn-svc
             containerPort: 8084

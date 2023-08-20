@@ -26,7 +26,7 @@ helm upgrade --install grafana bitnami/grafana \
 
 
 
-"""
+
 ############ USEFUL COMMANDS  ############
 
 # Port Forwarding/ Exposing Apps to outside world
@@ -34,8 +34,7 @@ helm upgrade --install grafana bitnami/grafana \
 # kubectl --namespace monitoring port-forward svc/prometheus-grafana 8089:80
 # kubectl --namespace monitoring port-forward svc/prometheus-kube-prometheus-prometheus 9090:9090
 # Listing all the resources running in Monotring namespace with SELECTOR:"release=prometheus"
-#kubectl --namespace monitoring get all --selector "release=prometheus"
+# kubectl --namespace monitoring get all --selector "release=prometheus"
 
-"""
 
 

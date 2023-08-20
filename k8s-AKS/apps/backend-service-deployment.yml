@@ -37,7 +37,7 @@ spec:
       containers:
       - name: backend-service
         image: docker.io/library/backend-service
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         ports:
           - name: port-be-svc
             containerPort: 8080

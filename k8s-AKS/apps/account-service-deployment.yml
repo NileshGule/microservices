@@ -38,7 +38,7 @@ spec:
       containers:
       - name: account-service
         image: docker.io/library/account-service
-        imagePullPolicy: Always
+        imagePullPolicy: Never
         ports:
           - name: metrics-port
             containerPort: 8082
