@@ -11,10 +11,10 @@ spec:
     - port: 8083
       protocol: TCP
       targetPort: 8083
-      nodePort: 30004
+#      nodePort: 30004
   selector:
     app: forex-service-deployment
-  type: NodePort
+  type: ClusterIP
 
 ---
 apiVersion: apps/v1
@@ -36,7 +36,7 @@ spec:
       containers:
       - name: forex-service
         image: docker.io/library/forex-service
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
           - name: port-fx-svc
             containerPort: 8083

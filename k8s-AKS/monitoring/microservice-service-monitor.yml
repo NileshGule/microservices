@@ -2,16 +2,15 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: finance-demo-service-monitor
+  name: microservice-service-monitor
   labels:
     release: prometheus
 spec:
   selector:
     matchLabels:
-      app: account-service-deployment
+      monitoring: service-monitoring-prometheus
   namespaceSelector:
     any: true
   endpoints:
     - port: metrics-port
-      path: "/actuator/prometheus"
-#      path: "/account-service/"
+      path: "/account-service/actuator/prometheus"

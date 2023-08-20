@@ -51,18 +51,3 @@ spec:
         env:
           - name: "COLLECTOR_OTLP_ENABLED"
             value: "true"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

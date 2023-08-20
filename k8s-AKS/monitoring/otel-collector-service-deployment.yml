@@ -12,55 +12,55 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: otel-collector-conf
-  
-  labels:
-    app: opentelemetry
-    component: otel-collector-conf
-data:
-  otel-collector-config: |
-    receivers:
-      otlp:
-        protocols:
-          grpc:
-          http:
-            cors:
-              allowed_origins:
-                - "http://*"
-                - "https://*"
-    
-    processors:
-      batch:
-    
-    exporters:
-      logging:
-        loglevel: debug
-      jaeger:
-        endpoint: "http://jaeger-service-deployment:14250"
-        tls:
-          insecure: true
-    
-      otlp:
-        endpoint: "http://otel-collector-deployment:4317"
-        tls:
-          insecure: true
-    
-    service:
-      pipelines:
-        traces:
-          receivers:  [ otlp ]
-          processors: [ batch ]
-          exporters:  [ logging, jaeger ] # [otlp, logging, spanmetrics]
-        metrics:
-          receivers: [ otlp ] # spanmetrics
-          exporters: [prometheus, logging] # [ logging ] 
-        logs:
-          receivers: [ otlp ]
-          processors: [ batch ]
-          exporters: [ logging ]
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: otel-collector-conf
+#
+#  labels:
+#    app: opentelemetry
+#    component: otel-collector-conf
+#data:
+#  otel-collector-config: |
+#    receivers:
+#      otlp:
+#        protocols:
+#          grpc:
+#          http:
+#            cors:
+#              allowed_origins:
+#                - "http://*"
+#                - "https://*"
+#
+#    processors:
+#      batch:
+#
+#    exporters:
+#      logging:
+#        loglevel: debug
+#      jaeger:
+#        endpoint: "http://jaeger-service-deployment:14250"
+#        tls:
+#          insecure: true
+#
+#      otlp:
+#        endpoint: "http://otel-collector-deployment:4317"
+#        tls:
+#          insecure: true
+#
+#    service:
+#      pipelines:
+#        traces:
+#          receivers:  [ otlp ]
+#          processors: [ batch ]
+#          exporters:  [ logging, jaeger ] # [otlp, logging, spanmetrics]
+#        metrics:
+#          receivers: [ otlp ] # spanmetrics
+#          exporters: [prometheus, logging] # [ logging ]
+#        logs:
+#          receivers: [ otlp ]
+#          processors: [ batch ]
+#          exporters: [ logging ]
 ---
 apiVersion: v1
 kind: Service

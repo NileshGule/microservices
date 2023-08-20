@@ -11,10 +11,10 @@ spec:
     - port: 8081
       protocol: TCP
       targetPort: 8081
-      nodePort: 30002
+#      nodePort: 30002
   selector:
     app: authentication-service-deployment
-  type: NodePort
+  type: ClusterIP
 
 ---
 
@@ -37,7 +37,7 @@ spec:
       containers:
       - name: authentication-service
         image: docker.io/library/authentication-service
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
           - name: port-auth-svc
             containerPort: 8081

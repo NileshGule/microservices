@@ -5,6 +5,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: forex-service-deployment
+    monitoring: service-monitoring-prometheus
   name: forex-service-deployment
 spec:
   ports:
@@ -35,15 +36,12 @@ spec:
     spec:
       containers:
       - name: forex-service
-        image: nileshgule/forex-service
+        image: docker.io/library/forex-service
         imagePullPolicy: Always
         ports:
           - name: port-fx-svc
             containerPort: 8083
-        env:
-          - name: "JAVA_OPTS"
-            value: "-javaagent:/app/opentelemetry-javaagent.jar"
         command:
           - /bin/bash
           - -c
-          - java --add-opens java.base/java.lang=ALL-UNNAMED -jar /app/app.jar --spring.profiles.active=k8s
+          - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar  -jar /app/app.jar --spring.profiles.active=k8s

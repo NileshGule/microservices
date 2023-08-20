@@ -13,7 +13,7 @@ kubectl delete svc transaction-service-deployment
 
 
 # Configmap
-kubectl delete configmap otel-collector-configmap
+#kubectl delete configmap otel-collector-configmap
 
 # Create deployment
 kubectl delete deployment jaeger-service-deployment

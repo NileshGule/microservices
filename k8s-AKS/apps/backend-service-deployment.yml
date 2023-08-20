@@ -4,6 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: backend-service-deployment
+    monitoring: service-monitoring-prometheus
   name: backend-service-deployment
 spec:
   ports:
@@ -35,7 +36,7 @@ spec:
     spec:
       containers:
       - name: backend-service
-        image: nileshgule/backend-service
+        image: docker.io/library/backend-service
         imagePullPolicy: Always
         ports:
           - name: port-be-svc
@@ -55,8 +56,24 @@ spec:
             value: "http://jaeger-service-deployment:14250"
           - name: "OTEL_EXPORTER_JAEGER_TIMEOUT"
             value: "10000"
-          - name: "JAVA_OPTS"
-            value: "-javaagent:/app/opentelemetry-javaagent.jar"
+
+          # ADD SERVICE URL PARAMS
+          - name: "AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_HOST"
+            value: "authentication-service-deployment"
+          - name: "AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_PORT"
+            value: "8081"
+          - name: "ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_HOST"
+            value: "account-service-deployment"
+          - name: "ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_PORT"
+            value: "8082"
+          - name: "FOREX_SERVICE_DEPLOYMENT_SERVICE_HOST"
+            value: "forex-service-deployment"
+          - name: "FOREX_SERVICE_DEPLOYMENT_SERVICE_PORT"
+            value: "8083"
+          - name: "TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_HOST"
+            value: "transaction-service-deployment"
+          - name: "TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_PORT"
+            value: "8084"
         command:
           - /bin/bash
           - -c

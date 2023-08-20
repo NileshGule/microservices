@@ -56,7 +56,7 @@ data:
           exporters:  [ logging, jaeger ] # [otlp, logging, spanmetrics]
         metrics:
           receivers: [ otlp ] # spanmetrics
-          exporters: [ logging ] # [prometheus, logging]
+          exporters: [prometheus, logging] # [ logging ] 
         logs:
           receivers: [ otlp ]
           processors: [ batch ]

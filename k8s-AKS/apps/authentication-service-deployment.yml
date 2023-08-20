@@ -5,6 +5,7 @@ metadata:
   creationTimestamp: null
   labels:
     app: authentication-service-deployment
+    monitoring: service-monitoring-prometheus
   name: authentication-service-deployment
 spec:
   ports:
@@ -36,15 +37,12 @@ spec:
     spec:
       containers:
       - name: authentication-service
-        image: nileshgule/authentication-service
+        image: docker.io/library/authentication-service
         imagePullPolicy: Always
         ports:
           - name: port-auth-svc
             containerPort: 8081
-        env:
-          - name: "JAVA_OPTS"
-            value: "-javaagent:/app/opentelemetry-javaagent.jar"
         command:
           - /bin/bash
           - -c
-          - java --add-opens java.base/java.lang=ALL-UNNAMED -jar /app/app.jar --spring.profiles.active=k8s
+          - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar  -jar /app/app.jar --spring.profiles.active=k8s

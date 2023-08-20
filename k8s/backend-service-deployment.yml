@@ -10,10 +10,10 @@ spec:
     - port: 8080
       protocol: TCP
       targetPort: 8080
-      nodePort: 30001
+#      nodePort: 30001
   selector:
     app: backend-service-deployment
-  type: NodePort
+  type: ClusterIP
 
 ---
 
@@ -36,7 +36,7 @@ spec:
       containers:
       - name: backend-service
         image: docker.io/library/backend-service
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
           - name: port-be-svc
             containerPort: 8080
