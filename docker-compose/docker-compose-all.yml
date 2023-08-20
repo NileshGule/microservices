@@ -1,67 +1,68 @@
 version: '3.9'
 services:
-#  jaeger-service:
-#    image: jaegertracing/all-in-one:latest
-#    container_name: jaeger-service
-#    ports:
-#      - "14250:14250"
-#      - "16686:16686"
-#    environment:
-#      - COLLECTOR_OTLP_ENABLED=true
-#
-#  otel-collector:
-#    image: otel/opentelemetry-collector:0.72.0
-#    container_name: otel-collector
-#    command: [ "--config=/etc/otel-collector-config.yml" ]
-#    volumes:
-#      - ./otel-config.yml:/etc/otel-collector-config.yml
-#    ports:
-#      - "4317:4317"
-#      - "4318:4318"
-#      - "8888"
-#    depends_on:
-#      - jaeger-service
-
-
-  backend-service:
-    image: backend-service
-    build:
-      context: ../
-      dockerfile: backend-service/Dockerfile
-    container_name: backend-service
+  jaeger-service:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger-service
     ports:
-      - "8080:8080"
-    entrypoint:
-      - /bin/bash
-      - -c
-      - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar --spring.profiles.active=k8s
+      - "14250:14250"
+      - "16686:16686"
     environment:
-      AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_HOST: "authentication-service"
-      AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_PORT: 8081
-      ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_HOST: "account-service"
-      ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_PORT: 8082
-      FOREX_SERVICE_DEPLOYMENT_SERVICE_HOST: "forex-service"
-      FOREX_SERVICE_DEPLOYMENT_SERVICE_PORT: 8083
-      TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_HOST: "transaction-service"
-      TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_PORT: 8084
-      OTEL_SERVICE_NAME: "backend-service"
-      OTEL_LOGS_EXPORTER: "otlp"
-      OTEL_METRICS_EXPORTER: "none"
-      OTEL_EXPORTER_OTLP_ENDPOINT: "http://otel-collector:4317" #http://jaeger-service:14250
-      OTEL_TRACES_EXPORTER: jaeger
-      OTEL_EXPORTER_JAEGER_ENDPOINT: "http://jaeger-service:14250" #http://jaeger-service:14250/v1/traces
-      OTEL_EXPORTER_JAEGER_TIMEOUT: 10000
-    depends_on:
-      - authentication-service
-      - account-service
-      - forex-service
-      - transaction-service
-#     - otel-collector
+      - COLLECTOR_OTLP_ENABLED=true
 
+  otel-collector:
+    image: otel/opentelemetry-collector:0.72.0
+    container_name: otel-collector
+    command: [ "--config=/etc/otel-collector-config.yml" ]
+    volumes:
+      - ./otel-config.yml:/etc/otel-collector-config.yml
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+      - "8888"
+    depends_on:
+      - jaeger-service
+
+
+#  backend-service:
+#    image: backend-service
+#    container_name: backend-service
+#    build:
+#      context: ../
+#      dockerfile: backend-service/Dockerfile
+#    ports:
+#      - "8080:8080"
+#    entrypoint:
+#      - /bin/bash
+#      - -c
+#      - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar --spring.profiles.active=k8s
+#    environment:
+#      # Service URL, Ports
+#      AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_HOST: "authentication-service"
+#      AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_PORT: 8081
+#      ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_HOST: "account-service"
+#      ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_PORT: 8082
+#      FOREX_SERVICE_DEPLOYMENT_SERVICE_HOST: "forex-service"
+#      FOREX_SERVICE_DEPLOYMENT_SERVICE_PORT: 8083
+#      TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_HOST: "transaction-service"
+#      TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_PORT: 8084
+#
+#      # OTEL
+#      OTEL_SERVICE_NAME: "backend-service"
+#      OTEL_TRACES_EXPORTER: "jaeger"
+#      OTEL_EXPORTER_JAEGER_ENDPOINT: "http://localhost:14250" #http://jaeger-service:14250/v1/traces
+#      OTEL_EXPORTER_OTLP_ENDPOINT: "http://locahost:4318"
+#      OTEL_EXPORTER_JAEGER_TIMEOUT: 40000
+#    depends_on:
+#      - authentication-service
+#      - account-service
+#      - forex-service
+#      - transaction-service
+#      - otel-collector
 
 
   authentication-service:
     image: authentication-service
+    container_name: authentication-service
     build:
       context: ../
       dockerfile: authentication-service/Dockerfile
@@ -75,6 +76,7 @@ services:
 
   account-service:
     image: account-service
+    container_name: account-service
     build:
       context: ../
       dockerfile: account-service/Dockerfile
@@ -88,6 +90,7 @@ services:
 
   forex-service:
     image: forex-service
+    container_name: forex-service
     build:
       context: ../
       dockerfile: forex-service/Dockerfile
@@ -101,6 +104,7 @@ services:
 
   transaction-service:
     image: transaction-service
+    container_name: transaction-service
     build:
       context: ../
       dockerfile: transaction-service/Dockerfile
@@ -110,6 +114,3 @@ services:
       - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar
     ports:
       - "8084:8084"
-
-
-

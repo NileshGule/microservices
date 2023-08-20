@@ -6,62 +6,29 @@ server:
 spring:
   application:
     name: account-service
-#  sleuth:
-#    otel:
-#      config:
-#        trace-id-ratio-based: 1.0
-#      exporter:
-#        otlp:
-#          endpoint: http://localhost:4317
-
-tracing:
-  url: http://localhost:4318/v1/traces
-
-
-
-
-
 
 management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
   endpoints:
     health:
       show-details: always
     web:
       exposure:
         include: info,health,metrics,loggers,beans,mappings,prometheus
-  tracing:
-    sampling:
-      probability: 1.0
-
-
   metrics:
     tags:
       application: ${spring.application.name}
     export:
       prometheus:
         enabled: true
-  endpoint:
-    metrics:
-      enabled: true
-    prometheus:
-      enabled: true
-
   prometheus:
     metrics:
       export:
         enabled: true
-
-
-
-
-#  spring.application.name=conference-demo
-#  #Actuator
-#  management.endpoints.web.exposure.include=info,health,metrics,loggers,beans,mappings,prometheus
-#  #management.endpoints.web.exposure.include=*
-#  management.endpoints.health.show-details=always
-#  management.metrics.tags.application=${spring.application.name}
-
-# Prometheus metrics
-#  management.endpoint.metrics.enabled=true
-#  management.endpoint.prometheus.enabled=true
-#  management.metrics.export.prometheus.enabled=true
+#  tracing:
+#    sampling:
+#      probability: 1.0
