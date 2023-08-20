@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# Otel CM, SVC, Deployment
+
 kubectl delete cm otel-collector-configmap
-# Create deployment, SVC
+
+# Monitoring Files
 kubectl delete -f monitoring/jaeger-service-deployment.yml
 kubectl delete -f monitoring/otel-collector-service-deployment.yml
 kubectl delete -f monitoring/microservice-service-monitor.yml
 
-
+# Applications
 kubectl delete -f apps/backend-service-deployment.yml
 kubectl delete -f apps/account-service-deployment.yml
 kubectl delete -f apps/authentication-service-deployment.yml
