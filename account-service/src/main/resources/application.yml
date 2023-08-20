@@ -17,16 +17,23 @@ spring:
 tracing:
   url: http://localhost:4318/v1/traces
 
+
+
+
+
+
 management:
+  endpoints:
+    health:
+      show-details: always
+    web:
+      exposure:
+        include: info,health,metrics,loggers,beans,mappings,prometheus
   tracing:
     sampling:
       probability: 1.0
 
-  endpoints:
-    web:
-      exposure:
-#        include: '*'
-          include: info,health,metrics,loggers,beans,mappings,prometheus
+
   metrics:
     tags:
       application: ${spring.application.name}
@@ -38,8 +45,7 @@ management:
       enabled: true
     prometheus:
       enabled: true
-    health:
-      show-details: always
+
   prometheus:
     metrics:
       export:
