@@ -10,9 +10,9 @@ metadata:
 spec:
   ports:
     - port: 8084
+      name: metrics-port
       protocol: TCP
       targetPort: 8084
-#      nodePort: 30005
   selector:
     app: transaction-service-deployment
   type: ClusterIP
@@ -49,12 +49,12 @@ spec:
           httpGet:
             port: 8084
             path: /actuator/health/liveness
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           periodSeconds: 5
         readinessProbe:
           httpGet:
             port: 8084
             path: /actuator/health/readiness
-          initialDelaySeconds: 45
+          initialDelaySeconds: 10
           periodSeconds: 5
           failureThreshold: 5

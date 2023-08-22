@@ -10,15 +10,14 @@ metadata:
 spec:
   ports:
     - port: 8081
+      name: metrics-port
       protocol: TCP
       targetPort: 8081
-#      nodePort: 30002
   selector:
     app: authentication-service-deployment
   type: ClusterIP
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -37,7 +36,7 @@ spec:
     spec:
       containers:
       - name: authentication-service
-        image: authentication-service
+        image: docker.io/library/authentication-service
         imagePullPolicy: Never
         ports:
           - name: app-port
@@ -50,12 +49,12 @@ spec:
           httpGet:
             port: 8081
             path: /actuator/health/liveness
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           periodSeconds: 5
         readinessProbe:
           httpGet:
             port: 8081
             path: /actuator/health/readiness
-          initialDelaySeconds: 45
+          initialDelaySeconds: 10
           periodSeconds: 5
           failureThreshold: 5

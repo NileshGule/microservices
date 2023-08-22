@@ -10,9 +10,9 @@ metadata:
 spec:
   ports:
     - port: 8083
+      name: metrics-port
       protocol: TCP
       targetPort: 8083
-#      nodePort: 30004
   selector:
     app: forex-service-deployment
   type: ClusterIP
@@ -49,12 +49,12 @@ spec:
           httpGet:
             port: 8083
             path: /actuator/health/liveness
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           periodSeconds: 5
         readinessProbe:
           httpGet:
             port: 8083
             path: /actuator/health/readiness
-          initialDelaySeconds: 45
+          initialDelaySeconds: 10
           periodSeconds: 5
           failureThreshold: 5
