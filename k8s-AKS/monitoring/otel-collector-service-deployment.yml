@@ -104,11 +104,7 @@ spec:
         component: otel-collector-deployment
     spec:
       containers:
-        - command:
-            - "/otelcol"
-            - "--config=/conf/otel-collector-config.yaml"
-#            - "--mem-ballast-size-mib=683"
-          image: otel/opentelemetry-collector:0.72.0
+        - image: otel/opentelemetry-collector:0.72.0
           imagePullPolicy: Never
           name: otel-collector-deployment
           ports:
@@ -116,13 +112,15 @@ spec:
             - containerPort: 4318 # Default endpoint for otlp receiver.
             - containerPort: 8888 # Default endpoint for querying metrics.
             - containerPort: 8889 # Default endpoint for querying metrics.
+#          command:
+#            - /bin/bash
+#            - ./otelcol --config=/otel/otel-collector-config.yaml
           volumeMounts:
-            - name: otel-collector-config-vol
-              mountPath: /conf
+            - name: otel-vol
+              mountPath: /otel/
+#              subPath: "otel-collector-config.yaml"
       volumes:
-        - configMap:
-            name: otel-collector-conf
-            items:
-              - key: otel-collector-config
-                path: otel-collector-config.yaml
-          name: otel-collector-config-vol
+        - name: otel-vol
+          configMap:
+            name: otel-collector-configmap
+

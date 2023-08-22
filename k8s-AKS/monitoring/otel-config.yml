@@ -1,12 +1,29 @@
 receivers:
+  # Data sources: traces
+  jaeger:
+    protocols:
+      grpc:
+      thrift_binary:
+      thrift_compact:
+      thrift_http:
+
   otlp:
     protocols:
       grpc:
       http:
-        cors:
-          allowed_origins:
-            - "http://*"
-            - "https://*"
+#        cors:
+#          allowed_origins:
+#            - "http://*"
+#            - "https://*"
+
+################# Wildcard Option 1 ################
+#          allowed_origins: [ "*" ]
+
+################# Individual services ################
+#          - https://localhost:8080
+#          - https://localhost:3000
+#          - http://localhost:3000
+##          allowed_headers: [ "*" ]
 
 processors:
   batch:
@@ -18,11 +35,11 @@ exporters:
     endpoint: jaeger-service:14250
     tls:
       insecure: true
-
   otlp:
-    endpoint: "jaeger-service:4317"
+    endpoint: "otel-collector:4317"
     tls:
       insecure: true
+
 
 service:
   pipelines:
@@ -30,10 +47,11 @@ service:
       receivers:  [ otlp ]
       processors: [ batch ]
       exporters:  [ logging, jaeger ] # [otlp, logging, spanmetrics]
-    metrics:
-      receivers: [ otlp ] # spanmetrics
-      exporters: [ logging ] # [prometheus, logging]
-    logs:
-      receivers: [ otlp ]
-      processors: [ batch ]
-      exporters: [ logging ]
+#    metrics:
+#      receivers: [ otlp ] # spanmetrics
+#      processors: [ batch ]
+#      exporters: [ logging, otlp ] # [prometheus, logging]
+#    logs:
+#      receivers: [ otlp ]
+#      processors: [ batch ]
+#      exporters: [ logging, otlp ]

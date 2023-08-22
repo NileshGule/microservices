@@ -1,11 +1,15 @@
-server:
-  port: 8082
-  servlet:
-    context-path: /account-service
-
 spring:
   application:
     name: account-service
+
+server:
+  port: 8082
+#  servlet:
+#    context-path: /account-service
+
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
 
 management:
   endpoint:
@@ -29,6 +33,6 @@ management:
     metrics:
       export:
         enabled: true
-#  tracing:
-#    sampling:
-#      probability: 1.0
+  tracing:
+    sampling:
+      probability: 1.0

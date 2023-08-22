@@ -49,13 +49,13 @@ spec:
         livenessProbe:
           httpGet:
             port: 8082
-            path: /account-service/actuator/health/liveness
-          initialDelaySeconds: 30
+            path: /actuator/health/liveness
+          initialDelaySeconds: 10
           periodSeconds: 5
         readinessProbe:
           httpGet:
             port: 8082
-            path: /account-service/actuator/health/readiness
-          initialDelaySeconds: 45
+            path: /actuator/health/readiness
+          initialDelaySeconds: 10
           periodSeconds: 5
           failureThreshold: 5

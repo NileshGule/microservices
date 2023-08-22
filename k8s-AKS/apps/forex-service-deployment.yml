@@ -48,13 +48,13 @@ spec:
         livenessProbe:
           httpGet:
             port: 8083
-            path: /forex-service/actuator/health/liveness
+            path: /actuator/health/liveness
           initialDelaySeconds: 30
           periodSeconds: 5
         readinessProbe:
           httpGet:
             port: 8083
-            path: /forex-service/actuator/health/readiness
+            path: /actuator/health/readiness
           initialDelaySeconds: 45
           periodSeconds: 5
           failureThreshold: 5

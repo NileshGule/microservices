@@ -13,4 +13,4 @@ spec:
     any: true
   endpoints:
     - port: metrics-port
-      path: "/account-service/actuator/prometheus"
+      path: "/actuator/prometheus"

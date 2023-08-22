@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: authentication-service
-        image: docker.io/library/authentication-service
+        image: authentication-service
         imagePullPolicy: Never
         ports:
           - name: app-port
@@ -49,13 +49,13 @@ spec:
         livenessProbe:
           httpGet:
             port: 8081
-            path: /authentication-service/actuator/health/liveness
+            path: /actuator/health/liveness
           initialDelaySeconds: 30
           periodSeconds: 5
         readinessProbe:
           httpGet:
             port: 8081
-            path: /authentication-service/actuator/health/readiness
+            path: /actuator/health/readiness
           initialDelaySeconds: 45
           periodSeconds: 5
           failureThreshold: 5

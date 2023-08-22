@@ -51,9 +51,9 @@ spec:
           - name: "OTEL_TRACES_EXPORTER"
             value: "jaeger"
           - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
-            value: "http://otel-collector-deployment:4317"
+            value: "http://otel-collector-deployment:30080"
           - name: "OTEL_EXPORTER_JAEGER_ENDPOINT"
-            value: "http://jaeger-service-deployment:14250"
+            value: "http://jaeger-service-deployment:30010"
           - name: "OTEL_EXPORTER_JAEGER_TIMEOUT"
             value: "10000"
 
@@ -81,13 +81,13 @@ spec:
         livenessProbe:
           httpGet:
             port: 8080
-            path: /backend-service/actuator/health/liveness
+            path: /actuator/health/liveness
           initialDelaySeconds: 30
           periodSeconds: 5
         readinessProbe:
           httpGet:
             port: 8080
-            path: /backend-service/actuator/health/readiness
+            path: /actuator/health/readiness
           initialDelaySeconds: 45
           periodSeconds: 5
           failureThreshold: 5
