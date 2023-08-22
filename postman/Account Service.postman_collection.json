@@ -4,7 +4,7 @@
 		"name": "Account Service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1906397",
-		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-149e9ad7-4745-43d7-8b75-5186c959f26d?action=share&creator=1906397&source=collection_link"
+		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/FractionalServices~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-149e9ad7-4745-43d7-8b75-5186c959f26d?action=share&source=collection_link&creator=1906397"
 	},
 	"item": [
 		{
@@ -13,16 +13,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/account-service/P-0123456791/USD",
+					"raw": "http://localhost:8082/P-0123456791",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8082",
 					"path": [
-						"account-service",
-						"P-0123456791",
-						"USD"
+						"P-0123456791"
 					]
 				}
 			},
@@ -34,14 +32,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/account-service/P-0123456789",
+					"raw": "http://localhost:8082/P-0123456789",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8082",
 					"path": [
-						"account-service",
 						"P-0123456789"
 					]
 				}
@@ -54,15 +51,34 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/account-service/version",
+					"raw": "http://localhost:8082/version",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8082",
 					"path": [
-						"account-service",
 						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Prometheus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/actuator/prometheus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"actuator",
+						"prometheus"
 					]
 				}
 			},

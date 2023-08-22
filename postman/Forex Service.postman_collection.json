@@ -4,7 +4,7 @@
 		"name": "Forex Service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1906397",
-		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-75c1edd9-311d-438c-ad0f-4d9f59fd428a?action=share&creator=1906397&source=collection_link"
+		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/FractionalServices~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-75c1edd9-311d-438c-ad0f-4d9f59fd428a?action=share&source=collection_link&creator=1906397"
 	},
 	"item": [
 		{
@@ -27,13 +27,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8083/forex-service/rates",
+					"raw": "localhost:8083/rates",
 					"host": [
 						"localhost"
 					],
 					"port": "8083",
 					"path": [
-						"forex-service",
 						"rates"
 					]
 				}
@@ -46,14 +45,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8083/forex-service/version",
+					"raw": "http://localhost:8083/version",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8083",
 					"path": [
-						"forex-service",
 						"version"
 					]
 				}

@@ -4,7 +4,7 @@
 		"name": "Transaction Service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1906397",
-		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-3160c55b-58fe-48d5-8975-ba400d4870b0?action=share&creator=1906397&source=collection_link"
+		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/FractionalServices~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-3160c55b-58fe-48d5-8975-ba400d4870b0?action=share&source=collection_link&creator=1906397"
 	},
 	"item": [
 		{
@@ -13,14 +13,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8084/transaction-service/version",
+					"raw": "http://localhost:8084/version",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8084",
 					"path": [
-						"transaction-service",
 						"version"
 					]
 				}
@@ -42,14 +41,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8084/transaction-service/accountTransactions",
+					"raw": "http://localhost:8084/accountTransactions",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8084",
 					"path": [
-						"transaction-service",
 						"accountTransactions"
 					]
 				}
