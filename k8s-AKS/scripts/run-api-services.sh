@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Configmap
-kubectl create configmap otel-collector-configmap  --from-file monitoring/otel-config.yml
+#kubectl create configmap otel-collector-configmap  --from-file monitoring/otel-config.yml
+kubectl apply -f monitoring/otel-agent-config.yml
 
 # Monitoring Files
 kubectl apply -f monitoring/jaeger-service-deployment.yml
