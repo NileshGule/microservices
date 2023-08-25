@@ -1,5 +1,5 @@
 # Configmap
-kubectl create configmap otel-collector-configmap  --from-file monitoring/otel-config.yml
+# kubectl create configmap otel-collector-configmap  --from-file monitoring/otel-config.yml
 
 # Create deployment, SVC
 kubectl apply -f monitoring/jaeger-service-deployment.yml

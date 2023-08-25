@@ -112,15 +112,17 @@ spec:
             - containerPort: 4318 # Default endpoint for otlp receiver.
             - containerPort: 8888 # Default endpoint for querying metrics.
             - containerPort: 8889 # Default endpoint for querying metrics.
-#          command:
-#            - /bin/bash
-#            - ./otelcol --config=/otel/otel-collector-config.yaml
+          command:
+            - "/otelcol"
+            - "--config=/conf/otel-agent-config.yaml"
           volumeMounts:
-            - name: otel-vol
-              mountPath: /otel/
-#              subPath: "otel-collector-config.yaml"
+            - name: otel-agent-conf-vol
+              mountPath: /conf
       volumes:
-        - name: otel-vol
+        - name: otel-agent-conf-vol
           configMap:
-            name: otel-collector-configmap
+            name: otel-agent-conf
+            items:
+              - key: otel-agent-config
+                path: otel-agent-config.yaml
 
