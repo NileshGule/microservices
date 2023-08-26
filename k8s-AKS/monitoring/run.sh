@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configmap
-#kubectl apply -f monitoring/otel-agent-config.yml
+kubectl apply -f monitoring/otel-agent-config.yml
 
 # Monitoring Files
 kubectl apply -f monitoring/jaeger-service-deployment.yml

@@ -43,18 +43,12 @@ spec:
         env:
           - name: "OTEL_SERVICE_NAME"
             value: "backend-service"
-          - name: "OTEL_LOGS_EXPORTER"
-            value: "otlp"
           - name: "OTEL_METRICS_EXPORTER"
             value: "none"
           - name: "OTEL_TRACES_EXPORTER"
             value: "jaeger"
-          - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
-            value: "http://otel-collector:4317"
           - name: "OTEL_EXPORTER_JAEGER_ENDPOINT"
             value: "http://jaeger-service-deployment:14250"
-          - name: "OTEL_EXPORTER_JAEGER_TIMEOUT"
-            value: "10000"
 
           # ADD SERVICE URL PARAMS
           - name: "AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_HOST"
@@ -76,7 +70,7 @@ spec:
         command:
           - /bin/bash
           - -c
-          - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar  -jar /app/app.jar --spring.profiles.active=k8s
+          - java -jar /app/app.jar --spring.profiles.active=k8s
         livenessProbe:
           httpGet:
             port: 8080

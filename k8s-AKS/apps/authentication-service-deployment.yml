@@ -41,10 +41,19 @@ spec:
         ports:
           - name: app-port
             containerPort: 8081
+        env:
+          - name: "OTEL_SERVICE_NAME"
+            value: "authentication-service"
+          - name: "OTEL_METRICS_EXPORTER"
+            value: "none"
+          - name: "OTEL_TRACES_EXPORTER"
+            value: "jaeger"
+          - name: "OTEL_EXPORTER_JAEGER_ENDPOINT"
+            value: "http://jaeger-service-deployment:14250"
         command:
           - /bin/bash
           - -c
-          - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar  -jar /app/app.jar --spring.profiles.active=k8s
+          - java -jar /app/app.jar
         livenessProbe:
           httpGet:
             port: 8081
