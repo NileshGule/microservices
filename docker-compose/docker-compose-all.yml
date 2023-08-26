@@ -23,22 +23,6 @@ services:
     depends_on:
       - jaeger-service
 
-# Collector
-#  otel-collector:
-#    image: otel/opentelemetry-collector:0.72.0
-#    container_name: otel-collector
-#    volumes:
-#      - ./otel-config.yml:/etc/collector-gateway.yaml
-#    command: [ "--config=/etc/collector-gateway.yaml" ]
-#    ports:
-#      - "1888:1888"   # pprof extension
-#      - "13133:13133" # health_check extension
-#      - "4317:4317"        # OTLP gRPC receiver
-#      - "4318:4318"        # OTLP HTTP receiver
-#      - "55670:55679" # zpages extension
-#    depends_on:
-#      - jaeger-service
-
 
   backend-service:
     image: backend-service
