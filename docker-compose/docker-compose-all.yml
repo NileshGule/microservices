@@ -51,7 +51,7 @@ services:
     entrypoint:
       - /bin/bash
       - -c
-      - java -jar main.jar --spring.profiles.active=k8s
+      - java -jar /app/app.jar --spring.profiles.active=k8s
     environment:
       # Service URL, Ports
       AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_HOST: "authentication-service"
@@ -85,7 +85,13 @@ services:
     entrypoint:
       - /bin/bash
       - -c
-      - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar
+      - java -jar /app/app.jar
+    environment:
+      # OTEL
+      OTEL_SERVICE_NAME: authentication-service
+      OTEL_METRICS_EXPORTER: none
+      OTEL_TRACES_EXPORTER: jaeger
+      OTEL_EXPORTER_JAEGER_ENDPOINT: http://jaeger-service:14250
     ports:
       - "8081:8081"
 
@@ -99,7 +105,13 @@ services:
     entrypoint:
       - /bin/bash
       - -c
-      - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar
+      - java -jar /app/app.jar
+    environment:
+      # OTEL
+      OTEL_SERVICE_NAME: account-service
+      OTEL_METRICS_EXPORTER: none
+      OTEL_TRACES_EXPORTER: jaeger
+      OTEL_EXPORTER_JAEGER_ENDPOINT: http://jaeger-service:14250
     ports:
       - "8082:8082"
 
@@ -113,7 +125,13 @@ services:
     entrypoint:
       - /bin/bash
       - -c
-      - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar
+      - java -jar /app/app.jar
+    environment:
+      # OTEL
+      OTEL_SERVICE_NAME: forex-service
+      OTEL_METRICS_EXPORTER: none
+      OTEL_TRACES_EXPORTER: jaeger
+      OTEL_EXPORTER_JAEGER_ENDPOINT: http://jaeger-service:14250
     ports:
       - "8083:8083"
 
@@ -127,6 +145,12 @@ services:
     entrypoint:
       - /bin/bash
       - -c
-      - java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar
+      - java -jar /app/app.jar
+    environment:
+      # OTEL
+      OTEL_SERVICE_NAME: transaction-service
+      OTEL_METRICS_EXPORTER: none
+      OTEL_TRACES_EXPORTER: jaeger
+      OTEL_EXPORTER_JAEGER_ENDPOINT: http://jaeger-service:14250
     ports:
       - "8084:8084"

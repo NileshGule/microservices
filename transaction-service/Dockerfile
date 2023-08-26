@@ -1,3 +1,5 @@
-FROM openjdk:22-ea-4-jdk-oraclelinux8
-COPY otel/opentelemetry-javaagent.jar /app/
-COPY transaction-service/target/transaction-service-0.0.1-SNAPSHOT.jar /app/app.jar
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY otel/opentelemetry-javaagent.jar .
+ENV JAVA_TOOL_OPTIONS "-javaagent:./opentelemetry-javaagent.jar"
+COPY transaction-service/target/*.jar /app/app.jar
