@@ -1,6 +1,10 @@
 # IntelliJ
 .idea/
 
+# Front end application 
+node_modules
+package-lock.json
+
 # Compiled class file
 *.class
 
