@@ -10,18 +10,18 @@ services:
     environment:
       - COLLECTOR_OTLP_ENABLED=true
 
-#  otel-collector:
-#    image: otel/opentelemetry-collector:0.72.0
-#    container_name: otel-collector
-#    command: [ "--config=/etc/otel-collector-config.yml" ]
-#    volumes:
-#      - ./otel-config.yml:/etc/otel-collector-config.yml
-#    ports:
-#      - "4317:4317"
-#      - "4318:4318"
-#      - "8888"
-#    depends_on:
-#      - jaeger-service
+  otel-collector:
+    image: otel/opentelemetry-collector:0.72.0
+    container_name: otel-collector
+    command: [ "--config=/etc/otel-collector-config.yml" ]
+    volumes:
+      - ./otel-config.yml:/etc/otel-collector-config.yml
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+      - "8888"
+    depends_on:
+      - jaeger-service
 
 # Collector
 #  otel-collector:
@@ -73,7 +73,6 @@ services:
       - account-service
       - forex-service
       - transaction-service
-#      - otel-collector
 
 
   authentication-service:
