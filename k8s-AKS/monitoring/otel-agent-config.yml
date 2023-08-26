@@ -28,11 +28,11 @@ data:
       logging:
         loglevel: debug
       jaeger:
-        endpoint: jaeger-service:14250
+        endpoint: jaeger-service-deployment:14250
         tls:
           insecure: true
       otlp:
-        endpoint: "otel-collector:4317"
+        endpoint: "otel-collector-service-deployment:4317"
         tls:
           insecure: true
   
@@ -43,11 +43,11 @@ data:
           receivers:  [ otlp ]
           processors: [ batch ]
           exporters:  [ logging, jaeger ] # [otlp, logging, spanmetrics]
-    #    metrics:
-    #      receivers: [ otlp ] # spanmetrics
-    #      processors: [ batch ]
-    #      exporters: [ logging, otlp ] # [prometheus, logging]
-    #    logs:
-    #      receivers: [ otlp ]
-    #      processors: [ batch ]
-    #      exporters: [ logging, otlp ]
+        metrics:
+          receivers: [ otlp ] # spanmetrics
+          processors: [ batch ]
+          exporters: [ logging, otlp ] # [prometheus, logging]
+        logs:
+          receivers: [ otlp ]
+          processors: [ batch ]
+          exporters: [ logging, otlp ]

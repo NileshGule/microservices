@@ -34,7 +34,7 @@ exporters:
   logging:
     loglevel: debug
   jaeger:
-    endpoint: jaeger-service:14250
+    endpoint: jaeger-service-deployment:14250
     tls:
       insecure: true
   otlp:
