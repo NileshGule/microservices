@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Otel Configmap
-kubectl delete monitoring/otel-agent-config.yml
+#kubectl delete monitoring/otel-agent-config.yml
 
 # Monitoring Files
 kubectl delete -f monitoring/jaeger-service-deployment.yml

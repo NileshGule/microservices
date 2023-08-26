@@ -50,7 +50,7 @@ spec:
           - name: "OTEL_TRACES_EXPORTER"
             value: "jaeger"
           - name: "OTEL_EXPORTER_OTLP_ENDPOINT"
-            value: "http://otel-collector-service-deployment:4317"
+            value: "http://otel-collector:4317"
           - name: "OTEL_EXPORTER_JAEGER_ENDPOINT"
             value: "http://jaeger-service-deployment:14250"
           - name: "OTEL_EXPORTER_JAEGER_TIMEOUT"
