@@ -4,7 +4,7 @@
 		"name": "Backend Services",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "1906397",
-		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/SynPulse~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-96c6fdbd-36b3-4e32-82bb-4a56d9070564?action=share&creator=1906397&source=collection_link"
+		"_collection_link": "https://solar-meteor-813859.postman.co/workspace/FractionalServices~4edf83ea-dc6b-45c4-8099-c999f081c467/collection/1906397-96c6fdbd-36b3-4e32-82bb-4a56d9070564?action=share&source=collection_link&creator=1906397"
 	},
 	"item": [
 		{
@@ -31,14 +31,51 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/backend-service/customer/transactions",
+					"raw": "http://localhost:8080/customer/transactions",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"backend-service",
+						"customer",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer accounts and transactions - Kubernetes",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAiY3VzdG9tZXJJZCI6ICJQLTAxMjM0NTY3ODkiICwgImVtYWlsIjoiZW1wbG95ZWUzQHNwLmNvbSJ9.nLxacDiNrEOcvZ-qlGgJ1ugEGNBxTck2AwFBIwZBsS0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"P-0123456791\",\n    \"currency\": \"USD\",\n    \"year\": 2020,\n    \"month\" : 10,\n    \"pageNo\": 30,\n    \"pageSize\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:30001/customer/transactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "30001",
+					"path": [
 						"customer",
 						"transactions"
 					]
@@ -70,14 +107,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/backend-service/customer/transactions",
+					"raw": "http://localhost:8080/customer/transactions",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"backend-service",
 						"customer",
 						"transactions"
 					]
@@ -91,15 +127,53 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/backend-service/version",
+					"raw": "http://localhost:8080/version",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"backend-service",
 						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Backend Version K8s",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:30001/version",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "30001",
+					"path": [
+						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Prometheus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actuator/prometheus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"prometheus"
 					]
 				}
 			},

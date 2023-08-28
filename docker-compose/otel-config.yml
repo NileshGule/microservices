@@ -1,25 +1,18 @@
 receivers:
   otlp:
     protocols:
-      grpc:
       http:
-        cors:
-          allowed_origins:
-            - "http://*"
-            - "https://*"
-
-################# Wildcard Option 1 ################
-#          allowed_origins: [ "*" ]
-
-################# Individual services ################
-#          - https://localhost:8080
-#          - https://localhost:3000
-#          - http://localhost:3000
-##          allowed_headers: [ "*" ]
-
+        endpoint: 0.0.0.0:4318
+      grpc:
+        endpoint: 0.0.0.0:4317
 processors:
   batch:
-
+    timeout: 1s
+  resource:
+    attributes:
+      - key: test.key
+        value: "test-value"
+        action: insert
 exporters:
   logging:
     loglevel: debug
@@ -27,42 +20,34 @@ exporters:
     endpoint: jaeger-service:14250
     tls:
       insecure: true
-
   otlp:
-    endpoint: "jaeger-service:4317"
+    endpoint: "otel-collector:4317"
     tls:
       insecure: true
-#    prometheus:
-#      endpoint: "otelcol:9464"
-#      resource_to_telemetry_conversion:
-#        enabled: true
-#      enable_open_metrics: true
+  otlphttp:
+    endpoint: "otel-collector:4317"
+    tls:
+      insecure: true
 
 
-#
-#processors:
-#  batch:
-#  filter:
-#    metrics:
-#      exclude:
-#        match_type: strict
-#        metric_names:
-#          - queueSize
-#
-#connectors:
-#  spanmetrics:
-
+extensions:
+  health_check:
+  pprof:
+    endpoint: :1888
+  zpages:
+    endpoint: :55679
 service:
+  extensions: [pprof, zpages, health_check]
   pipelines:
     traces:
-      receivers:  [ otlp ]
-      processors: [ batch ]
-      exporters:  [ logging, jaeger ] # [otlp, logging, spanmetrics]
-    metrics:
-      receivers: [ otlp ] # spanmetrics
-#      processors: [ filter, batch ]
-      exporters: [ logging ] # [prometheus, logging]
-    logs:
-      receivers: [ otlp ]
-      processors: [ batch ]
-      exporters: [ logging ]
+      receivers: [otlp]
+      processors: [batch, resource]
+      exporters: [logging, jaeger]
+#    metrics:
+#      receivers: [ otlp ] # spanmetrics
+#      processors: [ batch ]
+#      exporters: [ logging, otlp ] # [prometheus, logging]
+#    logs:
+#      receivers: [ otlp ]
+#      processors: [ batch ]
+#      exporters: [ logging, otlp ]

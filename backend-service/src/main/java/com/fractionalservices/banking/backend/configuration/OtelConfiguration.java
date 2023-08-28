@@ -8,7 +8,7 @@ package com.fractionalservices.banking.backend.configuration;
 
 //@Configuration
 public class OtelConfiguration {
-//
+
 //    @Bean
 //    @Primary
 //    OtlpHttpSpanExporter otlpHttpSpanExporter(@Value("${tracing.url}") String url) {

@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: backend-service-deployment
+    monitoring: service-monitoring-prometheus
+  name: backend-service-deployment
+spec:
+  ports:
+    - port: 8080
+      name: metrics-port
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: backend-service-deployment
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-service-deployment
+  labels: 
+    app: backend-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-service-deployment
+  template:
+    metadata:
+      labels:
+        app: backend-service-deployment
+    spec:
+      containers:
+      - name: backend-service
+        image: docker.io/library/backend-service
+        imagePullPolicy: Never
+        ports:
+          - name: app-port
+            containerPort: 8080
+        env:
+          - name: "OTEL_SERVICE_NAME"
+            value: "backend-service"
+          - name: "OTEL_METRICS_EXPORTER"
+            value: "none"
+          - name: "OTEL_TRACES_EXPORTER"
+            value: "jaeger"
+          - name: "OTEL_EXPORTER_JAEGER_ENDPOINT"
+            value: "http://jaeger-service-deployment:14250"
+
+          # ADD SERVICE URL PARAMS
+          - name: "AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_HOST"
+            value: "authentication-service-deployment"
+          - name: "AUTHENTICATION_SERVICE_DEPLOYMENT_SERVICE_PORT"
+            value: "8081"
+          - name: "ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_HOST"
+            value: "account-service-deployment"
+          - name: "ACCOUNT_SERVICE_DEPLOYMENT_SERVICE_PORT"
+            value: "8082"
+          - name: "FOREX_SERVICE_DEPLOYMENT_SERVICE_HOST"
+            value: "forex-service-deployment"
+          - name: "FOREX_SERVICE_DEPLOYMENT_SERVICE_PORT"
+            value: "8083"
+          - name: "TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_HOST"
+            value: "transaction-service-deployment"
+          - name: "TRANSACTION_SERVICE_DEPLOYMENT_SERVICE_PORT"
+            value: "8084"
+        command:
+          - /bin/bash
+          - -c
+          - java -jar /app/app.jar --spring.profiles.active=k8s
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /actuator/health/liveness
+          initialDelaySeconds: 10
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            port: 8080
+            path: /actuator/health/readiness
+          initialDelaySeconds: 10
+          periodSeconds: 60
+          failureThreshold: 5

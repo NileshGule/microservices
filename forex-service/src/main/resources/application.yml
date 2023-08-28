@@ -1,23 +1,38 @@
-server:
-  port: 8083
-  servlet:
-    context-path: /forex-service
-
 spring:
   application:
     name: forex-service
-#  sleuth:
-#    otel:
-#      config:
-#        trace-id-ratio-based: 1.0
-#      exporter:
-#        otlp:
-#          endpoint: http://localhost:4317
 
-tracing:
-  url: http://localhost:4318/v1/traces
+server:
+  port: 8083
+#  servlet:
+#    context-path: /forex-service
 
-  management:
-    tracing:
-      sampling:
-        probability: 1.0
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    health:
+      show-details: always
+    web:
+      exposure:
+        include: info,health,metrics,loggers,beans,mappings,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    export:
+      prometheus:
+        enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
