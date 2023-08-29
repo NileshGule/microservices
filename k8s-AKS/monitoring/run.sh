@@ -7,3 +7,7 @@ kubectl apply -f monitoring/otel-agent-config.yml
 kubectl apply -f monitoring/jaeger-service-deployment.yml
 kubectl apply -f monitoring/otel-collector-service-deployment.yml
 kubectl apply -f monitoring/microservice-service-monitor.yml
+
+# Prometheus related deployment
+kubectl apply -f monitoring/otel-rbac.yaml
+kubectl apply -f monitoring/otel-collector-allocator-config.yaml

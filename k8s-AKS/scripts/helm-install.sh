@@ -1,26 +1,29 @@
 #!/bin/bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+helm repo add jetstack https://charts.jetstack.io
+
 helm repo update
 
+# Cert Manager
+helm upgrade --install \
+  cert-manager jetstack/cert-manager \
+  --version v1.12.0 \
+  --set installCRDs=true \
+  --set admissionWebhooks.certManager.create=true
+
+# OpenTelemetry Operator
+helm upgrade --install my-opentelemetry-operator \
+  open-telemetry/opentelemetry-operator
 
 # Prometheus
 helm upgrade --install prometheus \
 prometheus-community/kube-prometheus-stack  \
 --values prometheus/prometheus_values.yaml \
 --set web.enable-remote-write-receiver=true \
---create-namespace \
---wait \
---namespace monitoring
+--wait
 
-# Install Grafana
-helm upgrade --install grafana bitnami/grafana \
---set admin.user=admin \
---set metrics.enabled=true \
---set metrics.serviceMonitor.enabled=true \
---create-namespace \
---wait \
---namespace monitoring
+
 
 # Start all the services
 #./run-api-services.sh
