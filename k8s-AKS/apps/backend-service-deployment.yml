@@ -35,8 +35,10 @@ spec:
     spec:
       containers:
       - name: backend-service
-        image: docker.io/library/backend-service
-        imagePullPolicy: Never
+#        image: docker.io/library/backend-service
+#        imagePullPolicy: Never
+        image: nileshgule/backend-service
+        imagePullPolicy: Always
         ports:
           - name: app-port
             containerPort: 8080

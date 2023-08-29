@@ -2,7 +2,6 @@
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
   labels:
     app: authentication-service-deployment
     monitoring: service-monitoring-prometheus
@@ -36,8 +35,10 @@ spec:
     spec:
       containers:
       - name: authentication-service
-        image: docker.io/library/authentication-service
-        imagePullPolicy: Never
+#        image: docker.io/library/authentication-service
+#        imagePullPolicy: Never
+        image: nileshgule/authentication-service
+        imagePullPolicy: Always
         ports:
           - name: app-port
             containerPort: 8081

@@ -36,7 +36,9 @@ spec:
     spec:
       containers:
       - name: forex-service
-        image: docker.io/library/forex-service
+#        image: docker.io/library/forex-service
+#        imagePullPolicy: Never
+        image: nileshgule/forex-service
         imagePullPolicy: Never
         ports:
           - name: app-port

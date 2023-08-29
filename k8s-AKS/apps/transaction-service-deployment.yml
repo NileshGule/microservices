@@ -36,8 +36,10 @@ spec:
     spec:
       containers:
       - name: transaction-service
-        image: docker.io/library/transaction-service
-        imagePullPolicy: Never
+#        image: docker.io/library/transaction-service
+#        imagePullPolicy: Never
+        image: nileshgule/transaction-service
+        imagePullPolicy: Always
         ports:
           - name: app-port
             containerPort: 8084
