@@ -25,7 +25,8 @@ services:
 
 
   backend-service:
-    image: backend-service
+#    image: backend-service
+    image: nileshgule/backend-service
     container_name: backend-service
     build:
       context: ../
@@ -60,7 +61,8 @@ services:
 
 
   authentication-service:
-    image: authentication-service
+#    image: authentication-service
+    image: nileshgule/authentication-service
     container_name: authentication-service
     build:
       context: ../
@@ -80,7 +82,8 @@ services:
 
 
   account-service:
-    image: account-service
+#    image: account-service
+    image: nileshgule/account-service
     container_name: account-service
     build:
       context: ../
@@ -100,7 +103,8 @@ services:
 
 
   forex-service:
-    image: forex-service
+#    image: forex-service
+    image: nileshgule/forex-service
     container_name: forex-service
     build:
       context: ../
@@ -120,7 +124,8 @@ services:
 
 
   transaction-service:
-    image: transaction-service
+#    image: transaction-service
+    image: nileshgule/transaction-service
     container_name: transaction-service
     build:
       context: ../
