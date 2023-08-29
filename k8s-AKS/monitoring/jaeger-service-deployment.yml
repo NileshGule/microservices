@@ -43,7 +43,7 @@ spec:
       containers:
       - name: jaeger-service
         image: jaegertracing/all-in-one:latest
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
           - name: jaeger-port
             containerPort: 14250

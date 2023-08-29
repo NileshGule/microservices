@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
         - image: otel/opentelemetry-collector:0.72.0
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           name: otel-collector-service-deployment
           ports:
             - containerPort: 4317 # Default GRPC endpoint for otlp receiver.
