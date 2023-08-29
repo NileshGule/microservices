@@ -38,7 +38,7 @@ spec:
 #        image: docker.io/library/account-service
 #        imagePullPolicy: Never
         image: nileshgule/account-service
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         ports:
           - name: app-port
             containerPort: 8082
