@@ -47,7 +47,7 @@ spec:
           - name: "OTEL_SERVICE_NAME"
             value: "transaction-service"
           - name: "OTEL_METRICS_EXPORTER"
-            value: "none"
+            value: "prometheus"
           - name: "OTEL_TRACES_EXPORTER"
             value: "jaeger"
           - name: "OTEL_EXPORTER_JAEGER_ENDPOINT"

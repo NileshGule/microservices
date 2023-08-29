@@ -8,6 +8,7 @@ helm repo update
 helm upgrade --install prometheus \
 prometheus-community/kube-prometheus-stack  \
 --values prometheus/prometheus_values.yaml \
+--set web.enable-remote-write-receiver=true \
 --create-namespace \
 --wait \
 --namespace monitoring

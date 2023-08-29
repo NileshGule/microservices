@@ -6,6 +6,7 @@ metadata:
     app: backend-service-deployment
     monitoring: service-monitoring-prometheus
   name: backend-service-deployment
+
 spec:
   ports:
     - port: 8080
@@ -46,7 +47,7 @@ spec:
           - name: "OTEL_SERVICE_NAME"
             value: "backend-service"
           - name: "OTEL_METRICS_EXPORTER"
-            value: "none"
+            value: "prometheus"
           - name: "OTEL_TRACES_EXPORTER"
             value: "jaeger"
           - name: "OTEL_EXPORTER_JAEGER_ENDPOINT"

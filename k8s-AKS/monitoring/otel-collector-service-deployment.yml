@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: otel-collector-service-deployment
+  name: otel-collector-service
   labels:
     app: opentelemetry
     component: otel-collector-service-deployment
@@ -19,6 +19,10 @@ spec:
       port: 8889
       protocol: TCP
       targetPort: 8889
+    - name: metrics2
+      port: 8888
+      protocol: TCP
+      targetPort: 8888
   selector:
     component: otel-collector-service-deployment
   type: ClusterIP
@@ -28,7 +32,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: otel-collector-service-deployment
+  name: otel-collector-deployment
   labels:
     app: opentelemetry
     component: otel-collector-service-deployment
@@ -47,7 +51,7 @@ spec:
       containers:
         - image: otel/opentelemetry-collector:0.72.0
           imagePullPolicy: Always
-          name: otel-collector-service-deployment
+          name: otel-collector
           ports:
             - containerPort: 4317 # Default GRPC endpoint for otlp receiver.
             - containerPort: 4318 # Default TCP endpoint for otlp receiver.

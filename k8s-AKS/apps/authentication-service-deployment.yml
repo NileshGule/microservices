@@ -6,6 +6,7 @@ metadata:
     app: authentication-service-deployment
     monitoring: service-monitoring-prometheus
   name: authentication-service-deployment
+
 spec:
   ports:
     - port: 8081
@@ -46,7 +47,7 @@ spec:
           - name: "OTEL_SERVICE_NAME"
             value: "authentication-service"
           - name: "OTEL_METRICS_EXPORTER"
-            value: "none"
+            value: "prometheus"
           - name: "OTEL_TRACES_EXPORTER"
             value: "jaeger"
           - name: "OTEL_EXPORTER_JAEGER_ENDPOINT"

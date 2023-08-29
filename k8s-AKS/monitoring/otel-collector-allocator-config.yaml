@@ -1,0 +1,43 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: otelcol
+spec:
+  mode: statefulset
+  targetAllocator:
+    image: ghcr.io/open-telemetry/opentelemetry-operator/target-allocator:main
+    enabled: true
+    serviceAccount: otelcol
+    prometheusCR:
+      enabled: true
+      serviceMonitorSelector:
+        monitoring: service-monitoring-prometheus
+  config: |
+    receivers:
+      prometheus:
+        config:
+          scrape_configs:
+          - job_name: account-service
+            scrape_interval: 5s
+            metrics_path: "/actuator/prometheus"
+            static_configs:
+              - targets: ["localhost:8082"]
+        target_allocator:
+          endpoint: http://otelcol-targetallocator
+          interval: 30s
+          collector_id: "${POD_NAME}"
+
+    exporters:
+      logging:
+        verbosity: detailed
+      prometheusremotewrite:
+        endpoint: "prometheus-kube-prometheus-prometheus:9090/api/v1/write"
+        resource_to_telemetry_conversion:
+          enabled: true
+
+    service:
+      pipelines:
+        metrics:
+          receivers: [prometheus]
+          processors: []
+          exporters: [logging, prometheusremotewrite]
