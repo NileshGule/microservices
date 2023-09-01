@@ -26,7 +26,13 @@ spec:
             scrape_interval: 30s
             metrics_path: "/actuator/prometheus"
             static_configs:
-              - targets: ["account-service-deployment:8082", "authentication-service-deployment:8081", "backend-service-deployment:8080", "forex-service-deployment:8083", "transaction-service-deployment:8084"]
+              # - targets: ["account-service-deployment:8082", "authentication-service-deployment:8081", "backend-service-deployment:8080", "forex-service-deployment:8083", "transaction-service-deployment:8084"]
+              - targets: 
+                - "account-service-deployment:8082"
+                - "authentication-service-deployment:8081"
+                - "backend-service-deployment:8080"
+                - "forex-service-deployment:8083"
+                - "transaction-service-deployment:8084"
               
         target_allocator:
           endpoint: http://otelcol-targetallocator
