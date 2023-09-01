@@ -21,7 +21,7 @@ spec:
             scrape_interval: 5s
             metrics_path: "/actuator/prometheus"
             static_configs:
-              - targets: ["localhost:8082"]
+              - targets: ["account-service-deployment:8082"]
         target_allocator:
           endpoint: http://otelcol-targetallocator
           interval: 30s
