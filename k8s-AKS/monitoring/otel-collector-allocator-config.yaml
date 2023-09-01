@@ -17,21 +17,22 @@ spec:
       prometheus:
         config:
           scrape_configs:
-          - job_name: account-service
-            scrape_interval: 5s
+          - job_name: finance-services
+            scrape_interval: 30s
             metrics_path: "/actuator/prometheus"
             static_configs:
-              - targets: ["account-service-deployment:8082"]
+              - targets: ["account-service-deployment:8082", "authentication-service-deployment:8081", "backend-service-deployment:8080", "forex-service-deployment:8083", "transaction-service-deployment:8084"]
+              
         target_allocator:
           endpoint: http://otelcol-targetallocator
           interval: 30s
           collector_id: "${POD_NAME}"
-
+      
     exporters:
       logging:
         verbosity: detailed
       prometheusremotewrite:
-        endpoint: "prometheus-kube-prometheus-prometheus:9090/api/v1/write"
+        endpoint: "http://prometheus-kube-prometheus-prometheus:9090/api/v1/write"
         resource_to_telemetry_conversion:
           enabled: true
 
