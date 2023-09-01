@@ -15,3 +15,14 @@ kubeEtcd:
   enabled: false
 kubeProxy:
   enabled: false
+
+#Additional grafana datasources is required if in the loki stack isDefault is not set to false
+# Loki stack overrides the default datasource, while installing loki make sure to set isDefault to false
+# grafana:
+#   ## Configure additional grafana datasources (passed through tpl)
+#   ## ref: http://docs.grafana.org/administration/provisioning/#datasources
+#   additionalDataSources:
+#     - name: Loki
+#       type: loki
+#       access: proxy
+#       url: http://loki:3100
