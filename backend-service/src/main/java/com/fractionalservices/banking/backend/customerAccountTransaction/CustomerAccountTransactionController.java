@@ -5,6 +5,8 @@ import com.fractionalservices.banking.backend.authentication.AuthenticationValid
 import com.fractionalservices.banking.backend.authentication.CustomerDetails;
 import com.fractionalservices.banking.backend.authentication.InvalidCustomerException;
 import com.fractionalservices.banking.backend.exception.BadRequestException;
+import io.micrometer.observation.Observation;
+import io.micrometer.observation.ObservationRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class CustomerAccountTransactionController {
 
     @Autowired
     private CustomerAccountTransactionService customerAccountTransactionService;
+
+    @Autowired
+    private ObservationRegistry observationRegistry;
 
     @PostMapping("/customer/transactions")
     public ResponseEntity<CustomerAccountTransactionResponse> getCustomerTransactions(
@@ -57,7 +62,7 @@ public class CustomerAccountTransactionController {
         ResponseEntity<CustomerAccountTransactionResponse> responseEntity = new ResponseEntity<CustomerAccountTransactionResponse>(catr, HttpStatus.OK);
 
         logger.debug("Get Customer Transactions ends");
-        return responseEntity;
+        return Observation.createNotStarted("getCustomerTransactions", observationRegistry).observe(() -> responseEntity);
     }
 
     private CustomerAccountTransactionResponse getTransactionTotal(List<CustomerTransactionResponse> response) {
@@ -76,7 +81,7 @@ public class CustomerAccountTransactionController {
         });
 
         logger.debug("Start doing totals - ends");
-        return catr;
+        return Observation.createNotStarted("getCustomerTransactions", observationRegistry).observe(() -> catr);
     }
 
     private void validateCustomerTransactionRequest(CustomerTransactionRequest customerTransactionRequest, String customerId) throws BadRequestException, InvalidCustomerException {
