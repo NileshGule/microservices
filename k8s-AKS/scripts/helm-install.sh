@@ -27,7 +27,7 @@ prometheus-community/kube-prometheus-stack  \
 # Loki
 helm upgrade --install loki \
 grafana/loki-stack  \
---set loki.isDefault=false
+--set loki.isDefault=false \
 --wait
 
 
