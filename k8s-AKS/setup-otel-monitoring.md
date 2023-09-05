@@ -34,7 +34,7 @@ Next we need to configure the OpenTelemetryCollector to send the metrics to Prom
 ```bash
 
 kubectl apply -f monitoring/otel-rbac.yaml
-kubectl apply -f monitoring/otel-collector-allocator-config.yaml
+kubectl apply -f monitoring/otel-collector-prometheus-loki-config.yaml
 
 ```
 

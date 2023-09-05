@@ -33,6 +33,9 @@ spec:
     metadata:
       labels:
         app: forex-service-deployment
+      annotations:
+        sidecar.opentelemetry.io/inject: "true"
+        instrumentation.opentelemetry.io/inject-java: "true"
     spec:
       containers:
       - name: forex-service
@@ -51,7 +54,7 @@ spec:
           - name: "OTEL_TRACES_EXPORTER"
             value: "jaeger"
           - name: "OTEL_EXPORTER_JAEGER_ENDPOINT"
-            value: "http://jaeger-service-deployment:14250"
+            value: "http://simplest-collector:14250"
         command:
           - /bin/bash
           - -c
