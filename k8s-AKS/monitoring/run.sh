@@ -10,4 +10,7 @@ kubectl apply -f monitoring/microservice-service-monitor.yml
 
 # Prometheus related deployment
 kubectl apply -f monitoring/otel-rbac.yaml
-kubectl apply -f monitoring/otel-collector-allocator-config.yaml
+kubectl apply -f monitoring/otel-collector-jaerger-prometheus-loki-config.yaml
+
+# Refer to following link for setting up Jaeger operator on Kubernetes
+# https://techblog.cisco.com/blog/getting-started-with-opentelemetry
