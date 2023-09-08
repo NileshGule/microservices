@@ -37,6 +37,7 @@ $ minikube service jaeger-service-deployment
 
 # Exposing services to outside world if you are running on Docker Desktop
 ```shell
+
 kubectl --namespace monitoring port-forward svc/prometheus-kube-prometheus-prometheus 9090:9090 &
 kubectl --namespace monitoring port-forward svc/prometheus-kube-prometheus-prometheus 8089:8089 &
 kubectl port-forward svc/jaeger-service-deployment 16686:16686 &

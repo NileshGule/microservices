@@ -5,6 +5,8 @@ receivers:
         endpoint: 0.0.0.0:4318
       grpc:
         endpoint: 0.0.0.0:4317
+
+
 processors:
   batch:
     timeout: 1s
@@ -13,6 +15,8 @@ processors:
       - key: test.key
         value: "test-value"
         action: insert
+
+
 exporters:
   logging:
     loglevel: debug
@@ -36,6 +40,8 @@ extensions:
     endpoint: :1888
   zpages:
     endpoint: :55679
+
+
 service:
   extensions: [pprof, zpages, health_check]
   pipelines:
