@@ -36,7 +36,7 @@ class ApplicationDeployment:
 
 
 with Diagram(name="Microservices Architecture Diagram - K8s", show=False, graph_attr=graph_attr):
-    nodeJSwebapp = NodeJS("Node JS Application")
+    # nodeJSwebapp = NodeJS("Node JS Application")
     loki = Custom("Loki Visualisation", "../images/loki.png")
 
     with Cluster("Open Telemetry Cluster"):
@@ -73,7 +73,7 @@ with Diagram(name="Microservices Architecture Diagram - K8s", show=False, graph_
         # txn_app.otel_jar >> Edge(label="Send Traces") >> otel_collector
 
     otel_collector << Edge(label="Collects Metrics") << metrics
-    nodeJSwebapp >> Edge(label="Send Traces") >> otel_collector
+    # nodeJSwebapp >> Edge(label="Send Traces") >> otel_collector
     otel_collector >> Edge(label="Exports Traces") >> jaeger
     otel_collector >> Edge(label="Send Logs") >> loki
     loki >> Edge(label="Visualise Logs") >> metrics

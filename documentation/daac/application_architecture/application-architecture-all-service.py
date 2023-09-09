@@ -24,26 +24,27 @@ class ApplicationDeployment:
     def service(self) -> Deployment:
         cluster_name = self.service_name + " - Deployment"
         with Cluster(cluster_name):
-            with Cluster("Container / Pod"):
-                self.otel_jar = otel_agent_jar = Custom("Otel Jar", "../images/jarfile.png")
-                service = Spring("Service 1\n Port " + self.port)
-                otel_agent_jar = self.otel_jar
-                pod_backend = [otel_agent_jar, service]
-                service << Edge(label="Auto Instrument") << self.otel_jar
-            deployment = Deployment(self.service_name + " Deployment")
-            return deployment
+            # with Cluster("Container / Pod"):
+            # self.otel_jar = otel_agent_jar = Custom("Otel Jar", "../images/jarfile.png")
+            service = Spring("Service 1\n Port " + self.port)
+            # otel_agent_jar = self.otel_jar
+            # pod_backend = [otel_agent_jar, service]
+            # service << Edge(label="Auto Instrument") << self.otel_jar
+            # deployment = Deployment(self.service_name + " Deployment")
+            return service
 
 
-with Diagram(name="Microservices Architecture Diagram", show=False, graph_attr=graph_attr):
+
+with Diagram(name="Microservices Architecture Diagram - All", show=False, graph_attr=graph_attr):
     nodeJSwebapp = NodeJS("Node JS Application")
 
     with Cluster("Open Telemetry Cluster"):
         otel_collector = Custom("OTEL Collector", "../images/otel.png")
         otel_deployment = Deployment("Deployment")
 
-    with Cluster("Monitoring Cluster"):
-        metrics = Prometheus("metric")
-        metrics << Edge(color="firebrick", style="dashed") << Grafana("monitoring")
+    # with Cluster("Monitoring Cluster"):
+    #     metrics = Prometheus("metric")
+    #     metrics << Edge(color="firebrick", style="dashed") << Grafana("monitoring")
 
     with Cluster("Tracing Backends Applications"):
         jaeger = Jaeger("Jaeger")
@@ -52,27 +53,39 @@ with Diagram(name="Microservices Architecture Diagram", show=False, graph_attr=g
 
         backend_app = ApplicationDeployment("Backend Service", "8080")
         backend_deployment = backend_app.service()
-        backend_app.otel_jar >> Edge(label="Send Traces") >> otel_collector
+        # backend_app.otel_jar >> Edge(label="Send Traces") >> otel_collector
 
         authentication_app = ApplicationDeployment("Authentication Service", "8081")
         authentication_deployment = authentication_app.service()
-        authentication_app.otel_jar >> Edge(label="Send Traces") >> otel_collector
+        authentication_deployment >> Edge(label="Send Traces") >> otel_collector
 
         account_app = ApplicationDeployment("Accounts Service", "8082")
         account_deployment = account_app.service()
-        account_app.otel_jar >> Edge(label="Send Traces") >> otel_collector
+        # account_app.otel_jar >> Edge(label="Send Traces") >> otel_collector
 
         forex_app = ApplicationDeployment("Forex Service", "8083")
         forex_deployment = forex_app.service()
-        forex_app.otel_jar >> Edge(label="Send Traces") >> otel_collector
+        # forex_app.otel_jar >> Edge(label="Send Traces") >> otel_collector
 
         txn_app = ApplicationDeployment("Transaction Service", "8084")
         txn_deployment = txn_app.service()
-        txn_app.otel_jar >> Edge(label="Send Traces") >> otel_collector
+        # txn_app.otel_jar >> Edge(label="Send Traces") >> otel_collector
 
-    otel_collector << Edge(label="Collects Metrics") << metrics
-    nodeJSwebapp >> Edge(label="Send Traces") >> otel_collector
+
+        application_services = [backend_app, authentication_app, account_app, forex_app, txn_app, nodeJSwebapp]
+
+    # otel_collector << Edge(label="Collects Metrics") << metrics
     otel_collector >> Edge(label="Exports Traces") >> jaeger
+    nodeJSwebapp >> Edge(label="Send Traces") >> otel_collector
+
+    backend_deployment >> Edge(label="REST API") >> authentication_deployment
+    backend_deployment >> Edge(label="REST API") >> account_deployment
+    backend_deployment >> Edge(label="REST API") >> txn_deployment
+
+
+
+
+
 
 
 
