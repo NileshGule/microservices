@@ -54,7 +54,7 @@ spec:
           - name: "OTEL_TRACES_EXPORTER"
             value: "jaeger"
           - name: "OTEL_EXPORTER_JAEGER_ENDPOINT"
-            value: "http://simplest-collector:14250"
+            value: "http://jaeger-tracing-collector:14250"
         command:
           - /bin/bash
           - -c

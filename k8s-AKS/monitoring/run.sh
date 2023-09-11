@@ -14,3 +14,4 @@ kubectl apply -f monitoring/otel-collector-jaerger-prometheus-loki-config.yaml
 
 # Refer to following link for setting up Jaeger operator on Kubernetes
 # https://techblog.cisco.com/blog/getting-started-with-opentelemetry
+# https://github.com/open-telemetry/opentelemetry-demo/blob/main/kubernetes/opentelemetry-demo.yaml
