@@ -26,7 +26,7 @@ class ApplicationDeployment:
         with Cluster(cluster_name):
             # with Cluster("Container / Pod"):
             # self.otel_jar = otel_agent_jar = Custom("Otel Jar", "../images/jarfile.png")
-            service = Spring("Service 1\n Port " + self.port)
+            service = Spring(self.service_name + "\n Port " + self.port)
             # otel_agent_jar = self.otel_jar
             # pod_backend = [otel_agent_jar, service]
             # service << Edge(label="Auto Instrument") << self.otel_jar
