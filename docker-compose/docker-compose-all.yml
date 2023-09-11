@@ -23,6 +23,10 @@ services:
     depends_on:
       - jaeger-service
 
+#
+# java --add-opens java.base/java.lang=ALL-UNNAMED -javaagent:/app/opentelemetry-javaagent.jar -jar /app/app.jar
+# java -javaagent:../otel/opentelemetry-javaagent.jar -jar target/backend-service-0.0.1-SNAPSHOT.jar
+#
 
 #  backendp-service:
 #    image: backend-service

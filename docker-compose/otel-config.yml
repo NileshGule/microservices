@@ -13,7 +13,7 @@ processors:
   resource:
     attributes:
       - key: test.key
-        value: "test-value"
+        value: "test-value on 11th Sep"
         action: insert
 
 
