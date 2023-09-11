@@ -45,3 +45,8 @@ We also need to enable the service monitor.
 kubectl apply -f monitoring/microservice-service-monitor.yml
 
 ```
+
+## Springboot Prometheus dashboard
+
+Refer to the link below for the dashboard to be imported in Grafana.
+Springboot : https://grafana.com/grafana/dashboards/11955

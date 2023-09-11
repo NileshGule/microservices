@@ -3,6 +3,7 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
 helm repo add jetstack https://charts.jetstack.io
+helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
 
 helm repo update
 
@@ -17,12 +18,20 @@ helm upgrade --install \
 helm upgrade --install my-opentelemetry-operator \
   open-telemetry/opentelemetry-operator
 
+# Jaeger
+helm upgrade --install jaeger \
+jaegertracing/jaeger-operator
+
 # Prometheus
 helm upgrade --install prometheus \
 prometheus-community/kube-prometheus-stack  \
 --values prometheus/prometheus_values.yaml \
 --set web.enable-remote-write-receiver=true \
 --wait
+
+# helm upgrade --install prometheus \
+# prometheus-community/kube-prometheus-stack  \
+# --wait
 
 # Loki
 helm upgrade --install loki \
