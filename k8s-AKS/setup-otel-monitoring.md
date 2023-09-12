@@ -4,12 +4,25 @@ This document describes the steps to setup OpenTelemetry monitoring for AKS clus
 
 We will be installing following componets required for monitoring:
 - Cert Manager
+- Jaeger Operator
 - OpenTelemetry Operator
 - Prometheus kube stack (Prometheus, Grafana, AlertManager)
 - Loki
 
-All these will be installed using Helm charts. We will use /scripts/helm-install.sh script to install these components.
+All these will be installed using Helm charts. We will use `(helm-install.sh)[/scripts/helm-install.sh]` script to install these components.
 Once all the components are installed, we need to do some configurations for the Open Telemetry operator to work correctly.
+
+# Configure Jaeger Operator
+
+In order for Jaeger to work correctly, after the Jaeger operator is installed, we need to deploy Jaeger-All-In-One strategy. Also apply the OTel Collector configuration.
+
+```bash
+
+kubectl apply -f monitoring/otel-collector-jaeger-config.yaml
+
+kubectl apply -f monitoring/jaeger-operator-config.yaml
+
+```
 
 First and foremost is the configuration for Prometheus to allow remote write. This is done by editing the prometheus object.
 
@@ -43,6 +56,16 @@ We also need to enable the service monitor.
 ```bash
 
 kubectl apply -f monitoring/microservice-service-monitor.yml
+
+```
+
+## Configure Jaeger operator
+
+In order for Jaeger to work correctly, after the Jaeger operator is installed, we need to deploy Jaeger-All-In-One strategy.
+
+```bash
+
+kubectl apply -f monitoring/jaeger-operator-config.yaml
 
 ```
 

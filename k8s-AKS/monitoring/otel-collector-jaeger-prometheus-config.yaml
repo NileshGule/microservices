@@ -1,0 +1,62 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: otelcol
+spec:
+  mode: statefulset
+  targetAllocator:
+    image: ghcr.io/open-telemetry/opentelemetry-operator/target-allocator:main
+    enabled: true
+    serviceAccount: otelcol
+    prometheusCR:
+      enabled: true
+      serviceMonitorSelector:
+        monitoring: service-monitoring-prometheus
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+          http:
+      
+      prometheus:
+        config:
+          scrape_configs:
+          - job_name: finance-services
+            scrape_interval: 30s
+            metrics_path: "/actuator/prometheus"
+            static_configs:
+              # - targets: ["account-service-deployment:8082", "authentication-service-deployment:8081", "backend-service-deployment:8080", "forex-service-deployment:8083", "transaction-service-deployment:8084"]
+              - targets: 
+                - "account-service-deployment:8082"
+                - "authentication-service-deployment:8081"
+                - "backend-service-deployment:8080"
+                - "forex-service-deployment:8083"
+                - "transaction-service-deployment:8084"
+              
+        target_allocator:
+          endpoint: http://otelcol-targetallocator
+          interval: 30s
+          collector_id: "${POD_NAME}"
+
+    
+    exporters:
+      jaeger:
+          endpoint: "jaeger-tracing-collector:14250"
+          tls:
+              insecure: true
+      prometheusremotewrite:
+        endpoint: "http://prometheus-kube-prometheus-prometheus:9090/api/v1/write"
+        resource_to_telemetry_conversion:
+          enabled: true
+
+    service:
+      pipelines:
+        metrics:
+          receivers: [prometheus]
+          processors: []
+          exporters: [logging, prometheusremotewrite]
+        traces:
+          receivers: [otlp]
+          processors: []
+          exporters: [jaeger]

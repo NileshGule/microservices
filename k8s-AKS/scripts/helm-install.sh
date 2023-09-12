@@ -23,15 +23,15 @@ helm upgrade --install jaeger \
 jaegertracing/jaeger-operator
 
 # Prometheus
-helm upgrade --install prometheus \
-prometheus-community/kube-prometheus-stack  \
---values prometheus/prometheus_values.yaml \
---set web.enable-remote-write-receiver=true \
---wait
-
 # helm upgrade --install prometheus \
 # prometheus-community/kube-prometheus-stack  \
+# --values prometheus/prometheus_values.yaml \
+# --set web.enable-remote-write-receiver=true \
 # --wait
+
+helm upgrade --install prometheus \
+prometheus-community/kube-prometheus-stack  \
+--wait
 
 # Loki
 helm upgrade --install loki \
