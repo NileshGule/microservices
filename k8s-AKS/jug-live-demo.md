@@ -3,6 +3,15 @@ az aks get-credentials \
 --name azure-singapore-cluster \
 --overwrite-existing
 
+```powershell
+
+az aks get-credentials `
+--resource-group demo-jug-rg `
+--name azure-singapore-cluster `
+--overwrite-existing
+
+```
+
 ## install all operators
 
 ```bash
@@ -11,19 +20,35 @@ az aks get-credentials \
 
 ```
 
-## Setup OTel Collector For Jaeger, Java Instrumentation and configure Jaeger Oeperator
+```Powershell
 
-```bash
-
-kubectl apply -f monitoring/otel-collector-jaeger-config.yaml
-
-kubeclt apply -f monitoring/JavaAutoInstrumentation.yaml
-
-kubectl apply -f monitoring/jaeger-operator-config.yaml
+/scripts/helm-install.ps1
 
 ```
 
-## Configure Prometheus
+## Distributed Tracing - Setup OTel Collector For Jaeger, Java Instrumentation and configure Jaeger Oeperator
+
+```bash
+
+kubectl apply -f monitoring/jaeger-operator-config.yaml
+
+kubectl apply -f monitoring/otel-collector-jaeger-config.yaml
+
+kubectl apply -f monitoring/JavaAutoInstrumentation.yaml
+
+
+
+```
+
+## Deploy application
+
+```bash
+
+kubectl apply -R -f apps/
+
+```
+
+## Metrics - Configure Prometheus
 
 ```bash
 
@@ -68,7 +93,20 @@ kubectl apply -f monitoring/otel-collector-jaeger-prometheus-loki-config.yaml
 
 ### switch to backup cluster
 
+``` bash
+
 az aks get-credentials \
 --resource-group demo-azure-singapore-rg \
 --name azure-singapore-cluster \
 --overwrite-existing
+
+```
+
+```Powershell
+
+az aks get-credentials `
+--resource-group demo-azure-singapore-rg `
+--name azure-singapore-cluster `
+--overwrite-existing
+
+```
