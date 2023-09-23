@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "1d4b6bd9-f447-4a3e-8c1f-61f49c3032fd",
+		"name": "Backend Services NGinx",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29543173"
+	},
+	"item": [
+		{
+			"name": "Get Customer accounts and transactions",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAiY3VzdG9tZXJJZCI6ICJQLTAxMjM0NTY3ODkiICwgImVtYWlsIjoiZW1wbG95ZWUzQHNwLmNvbSJ9.nLxacDiNrEOcvZ-qlGgJ1ugEGNBxTck2AwFBIwZBsS0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"P-0123456791\",\n    \"currency\": \"USD\",\n    \"year\": 2020,\n    \"month\" : 10,\n    \"pageNo\": 30,\n    \"pageSize\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://40.119.229.178/backend/customer/transactions",
+					"protocol": "http",
+					"host": [
+						"40",
+						"119",
+						"229",
+						"178"
+					],
+					"path": [
+						"backend",
+						"customer",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer accounts and transactions - Kubernetes",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAiY3VzdG9tZXJJZCI6ICJQLTAxMjM0NTY3ODkiICwgImVtYWlsIjoiZW1wbG95ZWUzQHNwLmNvbSJ9.nLxacDiNrEOcvZ-qlGgJ1ugEGNBxTck2AwFBIwZBsS0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"P-0123456791\",\n    \"currency\": \"USD\",\n    \"year\": 2020,\n    \"month\" : 10,\n    \"pageNo\": 30,\n    \"pageSize\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://40.119.229.178/backend/customer/transactions",
+					"protocol": "http",
+					"host": [
+						"40",
+						"119",
+						"229",
+						"178"
+					],
+					"path": [
+						"backend",
+						"customer",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer accounts and transactions - Invalid Currency",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAiY3VzdG9tZXJJZCI6ICJQLTAxMjM0NTY3ODkiICwgImVtYWlsIjoiZW1wbG95ZWUzQHNwLmNvbSJ9.nLxacDiNrEOcvZ-qlGgJ1ugEGNBxTck2AwFBIwZBsS0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"P-0123456791\",\n    \"currency\": \"INR\",\n    \"year\": 2020,\n    \"month\" : 10,\n    \"pageNo\": 30,\n    \"pageSize\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://40.119.229.178/backend/customer/transactions",
+					"protocol": "http",
+					"host": [
+						"40",
+						"119",
+						"229",
+						"178"
+					],
+					"path": [
+						"backend",
+						"customer",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Backend Version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://40.119.229.178/backend/version",
+					"protocol": "http",
+					"host": [
+						"40",
+						"119",
+						"229",
+						"178"
+					],
+					"path": [
+						"backend",
+						"version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Prometheus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://40.119.229.178/backend/actuator/prometheus",
+					"protocol": "http",
+					"host": [
+						"40",
+						"119",
+						"229",
+						"178"
+					],
+					"path": [
+						"backend",
+						"actuator",
+						"prometheus"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -39,8 +39,6 @@ spec:
     spec:
       containers:
       - name: account-service
-#        image: docker.io/library/account-service
-#        imagePullPolicy: Never
         image: nileshgule/account-service
         imagePullPolicy: Always
         ports:

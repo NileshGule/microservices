@@ -1,7 +1,6 @@
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
   labels:
     app: backend-service-deployment
     monitoring: service-monitoring-prometheus
@@ -39,8 +38,6 @@ spec:
     spec:
       containers:
       - name: backend-service
-#        image: docker.io/library/backend-service
-#        imagePullPolicy: Never
         image: nileshgule/backend-service
         imagePullPolicy: Always
         ports:
@@ -89,4 +86,10 @@ spec:
             path: /actuator/health/readiness
           initialDelaySeconds: 10
           periodSeconds: 60
-          failureThreshold: 5
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+          requests:
+            cpu: "0.5"
+            memory: "256Mi"
