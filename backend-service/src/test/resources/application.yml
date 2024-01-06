@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: backend-service
+
+server:
+  port: 8080
+#  servlet:
+#    context-path: /backend-service
+
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    health:
+      show-details: always
+    web:
+      exposure:
+        include: info,health,metrics,loggers,beans,mappings,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    export:
+      prometheus:
+        enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+
+
+services:
+  endpoint:
+    authenticate: http://localhost:8081
+    account: http://localhost:8082
+    forex: http://localhost:8083
+    transaction: http://localhost:8084
+  url:
+    authenticate-service: ${services.endpoint.authenticate}/authenticate/token?token=ll
+    account-service-customer: ${services.endpoint.account}/{customerId}
+    account-service-customer-currency: ${services.endpoint.account}/{customerId}/{currency}
+    exchange-rate: ${services.endpoint.forex}/rates
+    account-transaction-service: ${services.endpoint.transaction}/accountTransactions
+
+#  ssl:
+#    enabled: ${tomcat_ssl_enabled:false}
+#    key-store: ${tomcat_key_store_path}
+#    key-store-password: ${tomcat_key_store_pwd}
+#    key-store-type: ${tomcat_key_store_type}
+#    key-alias: ${tomcat_key_store_alias}
