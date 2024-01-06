@@ -3,7 +3,6 @@ package com.fractionalservices.banking.backend.health;
 import com.fractionalservices.banking.backend.CucumberSpringContextConfiguration;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.junit.platform.engine.Cucumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -11,7 +10,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Cucumber
+
 public class HealthFeatureTest extends CucumberSpringContextConfiguration {
 
     @Autowired
@@ -27,7 +26,7 @@ public class HealthFeatureTest extends CucumberSpringContextConfiguration {
         mockMvc.perform(get("/version"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("1.0")
-                        );
+                );
     }
 
     @Then("it is ready to serve customers")

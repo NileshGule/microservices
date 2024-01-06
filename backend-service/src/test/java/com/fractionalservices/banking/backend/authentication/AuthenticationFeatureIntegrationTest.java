@@ -14,7 +14,6 @@ import com.fractionalservices.banking.backend.transaction.NoTransactionException
 import com.fractionalservices.banking.backend.utils.MockRestApiUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.junit.platform.engine.Cucumber;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -38,7 +38,6 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 
 
-@Cucumber
 // @RunWith(MockitoJUnitRunner.class)
 @ExtendWith(MockitoExtension.class)
 public class AuthenticationFeatureIntegrationTest {
@@ -58,7 +57,9 @@ public class AuthenticationFeatureIntegrationTest {
     @Value("${services.url.authenticate-service}")
     private String authenticateUrl;
 
+    private static String validAuthenticationHeader = "P-0123456789eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAiY3VzdG9tZXJJZCI6ICJQLTAxMjM0NTY3ODkiICwgImVtYWlsIjoiZW1wbG95ZWUzQHNwLmNvbSJ9.nLxacDiNrEOcvZ-qlGgJ1ugEGNBxTck2AwFBIwZBsS0";
 
+    private static String validCustomerId = "P-0123456791";
     private HttpHeaders headers;
     private String customerId;
 
@@ -66,46 +67,37 @@ public class AuthenticationFeatureIntegrationTest {
     public void when_customer_login_without_auth_header() {
         // No Authentication headers are set
         headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_TYPE, "application/json");
+        headers.setContentType(MediaType.APPLICATION_JSON);
     }
 
     @When("A customer has invalid authentication header")
     public void when_customer_has_invalid_auth_token() {
         // No Authentication headers are set
         headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_TYPE, "application/json");
-        headers.add("authorization", "mock_customer_id");
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("authorization", "invalid_auth_token");
     }
 
     @When("A customer has valid authentication header")
     public void when_customer_has_auth_header() {
         // No Authentication headers are set
         headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_TYPE, "application/json");
-        headers.add("authorization", "mock_customer_id");
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("authorization", validAuthenticationHeader);
     }
 
     @When("Authentication Header is null")
     public void authentication_header_is_null() {
         headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("authorization", null);
     }
 
     @When("Authentication Header is {string}")
     public void authentication_header_is(String string) {
         headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("authorization", string);
-    }
-
-    @When("Authentication Header is not set")
-    public void when_authentication_header_is_missing() {
-        headers = new HttpHeaders();
-    }
-
-    @When("Authentication Header is empty")
-    public void when_authentication_header_is_empty() {
-        headers = new HttpHeaders();
-        headers.add("authorization", "");
     }
 
     @When("customerId is invalid")
@@ -115,7 +107,7 @@ public class AuthenticationFeatureIntegrationTest {
 
     @When("customerId is valid")
     public void when_customer_id_is_valid() {
-        this.customerId = "mock_customer_id";
+        this.customerId = validCustomerId;
     }
 
     @Then("System should fail the request")
@@ -133,41 +125,32 @@ public class AuthenticationFeatureIntegrationTest {
 
     @Then("{string} message is shown")
     public void message_is_shown(String string) {
-        Assertions.assertEquals(string, this.exceptionMessage);
-    }
-
-    @Then("'Invalid Customer' message is shown")
-    public void verify_invalid_customer_message() {
-        Assertions.assertEquals("Invalid Customer", this.exceptionMessage);
-    }
-
-    @Then("'Invalid authentication details' message is shown")
-    public void verify_invalid_authentication_details_message() {
-        Assertions.assertEquals("Invalid authentication details", this.exceptionMessage);
+        Assertions.assertEquals(this.exceptionMessage, string);
     }
 
     @Then("System should authenticate the request")
     public void system_authenticate_the_request() throws URISyntaxException, JsonProcessingException, NoTransactionException, AccountException, ForbiddenException, BadRequestException, InvalidCustomerException, CustomerAccountException {
 
         // Mock - Authentication Rest API Call
-        CustomerDetails customerDetails = new CustomerDetails("mock_customer_id");
+        CustomerDetails customerDetails = new CustomerDetails(validCustomerId);
         MockRestApiUtils.authenticationApiCall(authenticateUrl, restTemplate, HttpStatus.OK, customerDetails);
 
         //Mock Service method call
         List<CustomerTransactionResponse> responses = populateCustomerTransactionResponse();
         MockitoAnnotations.initMocks(this);
         Mockito.when(customerAccountTransactionService.getCustomerTransactions(
-                any(CustomerTransactionRequest.class), any(HttpHeaders.class)))
+                        any(CustomerTransactionRequest.class), any(HttpHeaders.class)))
                 .thenReturn(responses);
 
         // Actual Call
         HttpHeaders headers = new HttpHeaders();
-        headers.add("authorization", "mock_customer_id");
+        headers.add("authorization", validAuthenticationHeader);
         CustomerTransactionRequest ctr = populateCustomerTransactionRequest();
         ResponseEntity<CustomerAccountTransactionResponse> responseEntity = controller.getCustomerTransactions(ctr, headers);
 
         // Assertions
         CustomerAccountTransactionResponse catr = responseEntity.getBody();
+        Assertions.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         Assertions.assertEquals(100d, catr.getDebitTotal());
     }
 
