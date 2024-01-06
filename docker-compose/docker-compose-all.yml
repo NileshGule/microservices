@@ -28,7 +28,7 @@ services:
 # java -javaagent:../otel/opentelemetry-javaagent.jar -jar target/backend-service-0.0.1-SNAPSHOT.jar
 #
 
-#  backendp-service:
+#  backend-service:
 #    image: backend-service
 #    container_name: backend-service
 #    build:
