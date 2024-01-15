@@ -51,7 +51,7 @@ public class AccountService {
         log.info("Start get Account by CustomerID : {} and Currency: {} ", customerId, currency);
 
         List<AccountDetails> accountDetails = this.getAccountDetailsByCustomer(customerId);
-        log.info("No of Accounts for the customer/currency : {}", accountDetails.size());
+        log.info("No. of Accounts for the customer/currency : {}", accountDetails.size());
 
         return
                 customerAccountMap.get(customerId).stream()

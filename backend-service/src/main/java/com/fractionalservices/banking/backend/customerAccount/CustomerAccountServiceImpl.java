@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+// I am going to write unit test for this class. Can you please help me to write unit test for this class?
+
 @Service
 public class CustomerAccountServiceImpl implements CustomerAccountService {
 
@@ -39,6 +41,7 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
                 logger.info("No accounts found for the customer.");
                 throw new CustomerAccountException("No accounts found for the customer ");
             }
+            customerAccountDetails.setCustomerId(customerId);
             logger.info("Call to get customer accounts is completed");
 
             logger.info("Get customer transaction - ends");
@@ -49,16 +52,19 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
             throw new NoTransactionException("No customer accounts found with customerI");
         }
     }
+    public int addition(int a, int b) {
+        return a + b;
+    }
 
     private void validateRequest(String customerId, String currency) throws BadRequestException, InvalidCustomerException {
         if (currency == null || currency.trim().length() == 0) {
             logger.error("No currency provided error");
-            throw new BadRequestException("Currency not provide");
+            throw new BadRequestException("Currency is not provided");
         }
 
         if (customerId == null || customerId.trim().length() == 0) {
             logger.error("Invalid customer");
-            throw new InvalidCustomerException("Currency not provide");
+            throw new InvalidCustomerException("CustomerId is not provided");
         }
     }
 }
