@@ -1,7 +1,5 @@
 package com.fractionalservices.banking.backend.customerAccount;
 
-import com.fractionalservices.banking.backend.exception.BadRequestException;
-import com.fractionalservices.banking.backend.transaction.NoTransactionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.fractionalservices.banking.backend.exception.BadRequestException;
+import com.fractionalservices.banking.backend.transaction.NoTransactionException;
 
 @Service
 public class CustomerAccountServiceImpl implements CustomerAccountService {
@@ -24,14 +25,16 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
     private @NonNull String customerAccountServiceCustomerCurrencyUrl;
 
     @Override
-    public CustomerAccountDetails getCustomerAccountDetails(String customerId, String currency) throws NoTransactionException, BadRequestException {
+    public CustomerAccountDetails getCustomerAccountDetails(String customerId, String currency)
+            throws NoTransactionException, BadRequestException {
 
         logger.debug("Get customer Account details : start");
         validateRequest(customerId, currency);
 
         try {
             logger.info("Get customer details from account_service");
-            ResponseEntity<CustomerAccountDetails> responseEntity = restTemplate.exchange(customerAccountServiceCustomerCurrencyUrl,
+            ResponseEntity<CustomerAccountDetails> responseEntity = restTemplate.exchange(
+                    customerAccountServiceCustomerCurrencyUrl,
                     HttpMethod.GET, null, CustomerAccountDetails.class, customerId, currency);
             logger.debug("Get customer Account details : ends");
             CustomerAccountDetails customerAccountDetails = responseEntity.getBody();
@@ -50,6 +53,7 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
             throw new NoTransactionException("No customer accounts found with customerI");
         }
     }
+
     public int addition(int a, int b) {
         return a + b;
     }
