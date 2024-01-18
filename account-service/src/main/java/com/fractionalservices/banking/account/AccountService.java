@@ -21,7 +21,7 @@ public class AccountService {
         initialiseCustomerAccountMap();
     }
 
-    public static void initialiseCustomerAccountMap(){
+    public static void initialiseCustomerAccountMap() {
         log.info("Initialise Customer account-service map");
         customerAccountMap = new HashMap<>();
         String customer1 = "P-0123456789";
@@ -51,15 +51,15 @@ public class AccountService {
         log.info("Start get Account by CustomerID : {} and Currency: {} ", customerId, currency);
 
         List<AccountDetails> accountDetails = this.getAccountDetailsByCustomer(customerId);
+        if (accountDetails == null || accountDetails.isEmpty()) {
+            log.info("No. of Accounts for the customer : {}", customerId);
+            return null;
+        }
         log.info("No. of Accounts for the customer/currency : {}", accountDetails.size());
 
-        return
-                customerAccountMap.get(customerId).stream()
-                        .filter(ad -> {
-                            boolean ism = ad.getAccountCurrency().equalsIgnoreCase(currency);
-                            return ism;
-                        })
-                        .collect(Collectors.toList()).get(0);
+        return customerAccountMap.get(customerId).stream()
+                .filter(ad -> ad.getAccountCurrency().equalsIgnoreCase(currency))
+                .toList().get(0);
     }
 
     public List<AccountDetails> getAccountDetailsByCustomer(String customerId) {

@@ -1,4 +1,4 @@
-Feature: MyFeature: I want to validate if customer accessing the system are valid customer
+Feature: Authentication Feature. Ensure users of the system are authenticated users
 
   Scenario: If there is attempt to bypass the authentication without any auth headers, system should return validation error
     When A customer is trying to access transactions without proper authentication

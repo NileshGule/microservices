@@ -1,6 +1,5 @@
 package com.fractionalservices.banking.backend.customerAccount;
 
-import com.fractionalservices.banking.backend.authentication.InvalidCustomerException;
 import com.fractionalservices.banking.backend.exception.BadRequestException;
 import com.fractionalservices.banking.backend.transaction.NoTransactionException;
 import org.slf4j.Logger;
@@ -9,10 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-// I am going to write unit test for this class. Can you please help me to write unit test for this class?
 
 @Service
 public class CustomerAccountServiceImpl implements CustomerAccountService {
@@ -23,10 +21,10 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
     private RestTemplate restTemplate;
 
     @Value("${services.url.account-service-customer-currency}")
-    private String customerAccountServiceCustomerCurrencyUrl;
+    private @NonNull String customerAccountServiceCustomerCurrencyUrl;
 
     @Override
-    public CustomerAccountDetails getCustomerAccountDetails(String customerId, String currency) throws NoTransactionException, BadRequestException, InvalidCustomerException {
+    public CustomerAccountDetails getCustomerAccountDetails(String customerId, String currency) throws NoTransactionException, BadRequestException {
 
         logger.debug("Get customer Account details : start");
         validateRequest(customerId, currency);
@@ -56,7 +54,7 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
         return a + b;
     }
 
-    private void validateRequest(String customerId, String currency) throws BadRequestException, InvalidCustomerException {
+    protected void validateRequest(String customerId, String currency) throws BadRequestException {
         if (currency == null || currency.trim().length() == 0) {
             logger.error("No currency provided error");
             throw new BadRequestException("Currency is not provided");
@@ -64,7 +62,7 @@ public class CustomerAccountServiceImpl implements CustomerAccountService {
 
         if (customerId == null || customerId.trim().length() == 0) {
             logger.error("Invalid customer");
-            throw new InvalidCustomerException("CustomerId is not provided");
+            throw new BadRequestException("CustomerId is not provided");
         }
     }
 }

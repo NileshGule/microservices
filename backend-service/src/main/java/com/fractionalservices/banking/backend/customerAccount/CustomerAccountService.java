@@ -5,5 +5,5 @@ import com.fractionalservices.banking.backend.exception.BadRequestException;
 import com.fractionalservices.banking.backend.transaction.NoTransactionException;
 
 public interface CustomerAccountService {
-    CustomerAccountDetails getCustomerAccountDetails(String customerId, String currency) throws NoTransactionException, BadRequestException, InvalidCustomerException;
+    CustomerAccountDetails getCustomerAccountDetails(String customerId, String currency) throws NoTransactionException, BadRequestException;
 }
