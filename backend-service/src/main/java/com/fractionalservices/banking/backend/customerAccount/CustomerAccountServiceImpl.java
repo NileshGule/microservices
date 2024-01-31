@@ -13,6 +13,9 @@ import org.springframework.web.client.RestTemplate;
 import com.fractionalservices.banking.backend.exception.BadRequestException;
 import com.fractionalservices.banking.backend.transaction.NoTransactionException;
 
+/**
+ * This class implements the CustomerAccountService interface and provides the implementation for retrieving customer account details.
+ */
 @Service
 public class CustomerAccountServiceImpl implements CustomerAccountService {
 

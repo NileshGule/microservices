@@ -60,7 +60,7 @@ public class CustomerAccountTransactionController {
         return responseEntity;
     }
 
-    private CustomerAccountTransactionResponse getTransactionTotal(List<CustomerTransactionResponse> response) {
+    CustomerAccountTransactionResponse getTransactionTotal(List<CustomerTransactionResponse> response) {
         logger.debug("Start doing totals - starts");
         CustomerAccountTransactionResponse catr = new CustomerAccountTransactionResponse();
         catr.setCustomerTransactionResponses(response);
